@@ -1,5 +1,9 @@
 class TTexts {
   // --GLOBAL Texts
+  static const String and = "and";
+  static const String tContinue = "Continue";
+  static const String submit = "Submit";
+  static const String done = "Done";
 
   // --OnBoarding Texts
   static const String onBoardingTittle1 = "Choose your product";
@@ -38,7 +42,7 @@ class TTexts {
   static const String loginTitle = "Welcome back";
   static const String loginSubTitle =
       "Discover Limitless Choices and Unmatched Convenience.";
-  static const String signipTitle = "Let's create your account";
+  static const String signupTitle = "Let's create your account";
   static const String forgetPasswordTitle = "Forget Password";
   static const String forgetPasswordSubTitle =
       "Don't worry sometimes people can forget too, enter your email and we will send you a password reset link.";
