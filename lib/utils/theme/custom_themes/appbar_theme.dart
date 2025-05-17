@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sneakerhead/utils/constants/sizes.dart';
+import 'package:sneakerhead/utils/constants/colors.dart';
 
 class TAppBarTheme {
   TAppBarTheme._();
