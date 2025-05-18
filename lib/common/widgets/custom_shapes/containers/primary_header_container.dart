@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/curved_edges/curved_edge_widget.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/curved_edges/curved_edges.dart';
+import 'package:sneakerhead/utils/constants/colors.dart';
 
 class TPrimaryHeaderContainer extends StatelessWidget {
   const TPrimaryHeaderContainer({

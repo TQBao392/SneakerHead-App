@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sneakerhead/common/widgets/custom_shapes/containers/circular_container.dart';
-import 'package:sneakerhead/common/widgets/custom_shapes/curved_edges/curved_edge_widget.dart';
-import 'package:sneakerhead/common/widgets/custom_shapes/curved_edges/curved_edges.dart';
-import 'package:sneakerhead/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:sneakerhead/utils/constants/colors.dart';
+import 'package:iconsax/iconsax.dart';
+
 import 'package:sneakerhead/utils/constants/sizes.dart';
-import 'package:sneakerhead/screens/home/home.dart';
 import 'package:sneakerhead/utils/device/device_utility.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {

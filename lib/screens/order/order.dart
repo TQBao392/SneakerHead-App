@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/utils.dart';
 import 'package:sneakerhead/common/widgets/appbar/appbar.dart';
 import 'package:sneakerhead/screens/order/widgets/orders_list.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
+
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({Key? key}) : super(key: key);
