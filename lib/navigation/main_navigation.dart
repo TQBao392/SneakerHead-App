@@ -17,7 +17,7 @@ class _MainNavigationState extends State<MainNavigation> {
   final List<Widget> _screens = [
     SettingsScreen(), // index 0
     ProfileScreen(),  // index 1
-    CartScreen(), //index 2
+    CartPage(), //index 2
   ];
 
   void _onItemTapped(int index) {
