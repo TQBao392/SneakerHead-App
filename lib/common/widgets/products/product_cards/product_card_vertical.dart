@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
+import 'package:sneakerhead/common/widgets/t_circular_icon.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/image_strings.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
