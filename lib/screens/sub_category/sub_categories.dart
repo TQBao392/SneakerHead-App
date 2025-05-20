@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sneakerhead/common/widgets/products/product_cards/product_card_horizontal.dart';
 import 'package:sneakerhead/common/widgets/texts/section_heading.dart';
 import 'package:sneakerhead/utils/constants/image_strings.dart';
 
@@ -23,12 +24,10 @@ class SubCategoriesScreen extends StatelessWidget {
                     const SizedBox(height: TSizes.spaceBtwSections),
 
                     /// Sub Categories
-    Column(
-    children: [
-      /// Heading
-    TSectionHeading(title: 'Sports shirts', onPressed: (){}),
-    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    Column(
+                      children: [
+                      /// Heading
+                      TSectionHeading(title: 'Sports shirts', onPressed: (){}),
+                      const SizedBox(height: TSizes.spaceBtwItems / 2),
 
-
-    ],
-    )
+                      const TProductCardHorizontal(),

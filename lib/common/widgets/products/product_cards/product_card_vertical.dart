@@ -24,8 +24,8 @@ class TProductCardVertical extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [TShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-          color: dark ? TColors.darkerGrey : TColors.white, // Sửa ở đây
-        ), // BoxDecoration
+          color: dark ? TColors.darkerGrey : TColors.white,
+        ),
         child: Column(
           children: [
             /// Thumbnail, Wishlist Button, Discount Tag
@@ -46,12 +46,9 @@ class TProductCardVertical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
                         '25%',
-                        style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.black),
+                        style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.black)),
                       ),
                     ),
-                  ),
-
-                  // - Favourite Icon Button
                   const Positioned(
                     top: 0,
                     right: 0,
