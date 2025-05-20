@@ -1,0 +1,2 @@
+D:/Downloads/mobile/sneakerhead/android/app/.cxx/Debug/h2n400f4/x86_64/CMakeFiles/edit_cache.dir
+D:/Downloads/mobile/sneakerhead/android/app/.cxx/Debug/h2n400f4/x86_64/CMakeFiles/rebuild_cache.dir
