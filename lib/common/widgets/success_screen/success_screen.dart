@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sneakerhead/common/styles/spacing_styles.dart';
-import 'package:sneakerhead/features/authentication/screens/login/login.dart';
-import 'package:sneakerhead/utils/constants/image_strings.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
-import 'package:sneakerhead/utils/constants/text_strings.dart';
-import 'package:sneakerhead/utils/helpers/helper_functions.dart';
+import '../../../common/styles/spacing_styles.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/constants/text_strings.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class SuccessScreen extends StatelessWidget {
   const SuccessScreen({

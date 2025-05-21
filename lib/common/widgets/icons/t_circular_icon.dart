@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sneakerhead/utils/constants/colors.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
-import 'package:sneakerhead/utils/helpers/helper_functions.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class TCircularIcon extends StatelessWidget {
   /// A custom Circular Icon widget with a background color.

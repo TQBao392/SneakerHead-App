@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sneakerhead/utils/constants/colors.dart';
-import 'package:sneakerhead/utils/constants/image_strings.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/constants/sizes.dart';
 
 class TSocialButtons extends StatelessWidget {
   const TSocialButtons({super.key});

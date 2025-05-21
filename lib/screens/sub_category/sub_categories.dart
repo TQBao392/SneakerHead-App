@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sneakerhead/common/widgets/products/product_cards/product_card_horizontal.dart';
-import 'package:sneakerhead/common/widgets/texts/section_heading.dart';
-import 'package:sneakerhead/utils/constants/image_strings.dart';
+import '../../common/widgets/products/product_cards/product_card_horizontal.dart';
+import '../../common/widgets/texts/section_heading.dart';
+import '../../utils/constants/image_strings.dart';
 
-import 'package:sneakerhead/common/widgets/appbar/appbar.dart';
-import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
+import '../../common/widgets/appbar/appbar.dart';
+import '../../common/widgets/images/t_rounded_image.dart';
+import '../../utils/constants/sizes.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
   const SubCategoriesScreen({super.key});
