@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
 import 'package:sneakerhead/common/widgets/t_circular_icon.dart';
+import 'package:sneakerhead/common/widgets/texts/t_product_price_text.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/image_strings.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
@@ -47,7 +48,8 @@ class TProductCardVertical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
                         '25%',
-                        style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.black)),
+                        style: Theme.of(context).textTheme.labelLarge?.apply(color: TColors.black),
+                      ),
                       ),
                     ),
                   const Positioned(
@@ -55,12 +57,68 @@ class TProductCardVertical extends StatelessWidget {
                     right: 0,
                     child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red),
                   ),
+
+                  /// - Favourite Icon Button
+                  const Positioned(
+                    top: 0,
+                    right: 0,
+                    child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red),
+                  )
                 ],
               ),
             ),
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
+
+            /// - Details
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: TSizes.sm),
+              // Only reason to user the [SizeBox] here is to make Column full Width
+              child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TProductTitleText(title: 'Green Nike', smallSize: true),
+                    SizedBox(height: TSizes.spaceBtwItems /2),
+                    TBrandTitleWithVerifiedIcon(title: 'Nike'),
+                  ],
+                ),
+            ),
+      ),
+
+            // User Spacer() to utilize all the space to set the price and the cart button at the bottom
+            //  This usually happens when Product title is in single line or 2 lines (max)
+            const Spacer(),
+
+            /// Price Row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// Price
+                const Padding(
+                  padding: EdgeInsets.only(left: TSizes.sm),
+                  child: TProductPriceText(price: '35.0'),
+                ),
+
+                /// Add to cart button
+                Container(
+                  decoration: const BoxDecoration(
+                    color: TColors.dark,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(TSizes.cardRadiusMd),
+                      bottomRight: Radius.circular(TSizes.productImageRadius),
+                    ),
+                  ),
+                  child: const SizedBox(
+                    width: TSizes.iconLg * 1.2,
+                    height: TSizes.iconLg * 1.2,
+                    child: Center(child: Icon(Iconsax.add, color: TColors.white)),
+                  ),
+                ),
+              ],
+            ),
           ],
+          ),
         ),
       ),
-    );
   }
 }

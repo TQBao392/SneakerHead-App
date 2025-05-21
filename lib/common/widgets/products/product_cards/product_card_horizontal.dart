@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
 import 'package:sneakerhead/common/widgets/t_circular_icon.dart';
+import 'package:sneakerhead/common/widgets/texts/t_product_price_text.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/image_strings.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
@@ -19,9 +20,8 @@ class TProductCardHorizontal extends StatelessWidget {
       width: 310,
       padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
-        boxShadow: [TShadowStyle.verticalProductShadow],
         borderRadius: BorderRadius.circular (TSizes.productImageRadius),
-        color: dark? TColors.darkerGrey:TColors.white,
+        color: dark? TColors.darkerGrey : TColors.softGrey,
       ),
       child: Row(
         children: [
@@ -36,7 +36,8 @@ class TProductCardHorizontal extends StatelessWidget {
                   SizedBox(
                   height: 120,
                   width: 120,
-                  child: TRoundedImage(imageUrl: TImages.productImage1, applyImageRadius: true),
+                  child: TRoundedImage(imageUrl: TImages.productImage1, applyImageRadius: true,
+                  ),
                   ),
 
                   /// - Sale Tag
@@ -67,30 +68,49 @@ class TProductCardHorizontal extends StatelessWidget {
           const SizedBox(
             width: 172,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(top: TSizes.sm,left: TSizes.sm),
               child: Column(
                 children: [
-                  Column(
-                  children: [
-                    TProductTitleText(
-                      title: 'Nike Air Max 270 React',
-                      smallSize: true),
-                    SizedBox(height: TSizes.spaceBtwItems /2),
-                    TBrandTitleWithVerifiedIcon(title: 'Nike'),
-                  ],
-                                  ),
-                    Row(
-                      children: [
-                        /// Pricing
-                        TProductPriceText(price: '256.0'),
-
-
-                        /// Add to cart
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                        TProductTitleText(
+                          title: 'Green Nike Half Sleeve T-shirt',
+                          smallSize: true),
+                        SizedBox(height: TSizes.spaceBtwItems /2),
+                        TBrandTitleWithVerifiedIcon(title: 'Nike'),
                       ],
-                    )
+                    ),
+
+                  const Spacer(),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      /// Pricing
+                      const Flexible(child: TProductPriceText(price: '256.0 - 25689.6')),
+
+                      /// Add to cart
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: TColors.dark,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(TSizes.cardRadiusMd),
+                            bottomRight: Radius.circular(TSizes.productImageRadius),
+                          ),
+                        ),
+                        child: const SizedBox(
+                          width: TSizes.iconLg * 1.2,
+                          height: TSizes.iconLg * 1.2,
+                          child: Center(child: Icon(Iconsax.add, color: TColors.white)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
