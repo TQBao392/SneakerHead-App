@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sneakerhead/common/widgets/appbar/appbar.dart';
+import 'package:sneakerhead/common/widgets/layouts/grid_layout.dart';
+import 'package:sneakerhead/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
 import 'package:sneakerhead/screens/sub_category/sub_categories.dart';
 
@@ -26,7 +28,7 @@ class AllProducts extends StatelessWidget {
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 /// Products
-                TGridLayout()
+                TGridLayout(itemCount: 4, itemBuilder: (_, index) => TProductCardVertical())
               ],
             ),
             ),
