@@ -3,10 +3,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sneakerhead/features/authentication/screens/signup/verify_email.dart';
 import 'package:sneakerhead/features/authentication/screens/signup/widgets/terms_condition_checkbox.dart';
-import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
 import 'package:sneakerhead/utils/constants/text_strings.dart';
-import 'package:sneakerhead/utils/helpers/helper_functions.dart';
 
 class TSignupForm extends StatelessWidget {
   const TSignupForm({super.key});

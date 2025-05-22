@@ -25,6 +25,40 @@ class TBrandCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       /// Container Design
+      child: TRoundedContainer(
+        showBorder: showBorder,
+        backgroundColor: Colors.transparent,
+        padding: const EdgeInsets.all(TSizes.sm),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            /// Icon
+            Flexible(child: TCircularImage(
+              isNetworkImage: false,
+              image: TImages.clothIcon,
+              backgroundColor: Colors.transparent,
+              overlayColor: isDark ? TColors.white: TColors.black,
+            ),
+            ),
+            const SizedBox(width: TSizes.spaceBtwItems /2),
+
+            /// -- Texts
+            Expanded(child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const TBrandTitleWithVerifiedIcon(title: 'Nike', brandTextSize: TextSizes.large),
+                Text(
+                  '25 products',
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelMedium,
+                  ),
+              ],
+            ),
+            ),
+          ],
+        ),
+      ),
 
     )
   }

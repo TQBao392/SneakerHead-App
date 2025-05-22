@@ -140,7 +140,7 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 ],
               ),
             );
-          }).toList(),
+          }),
 
           // Promo code
           Container(

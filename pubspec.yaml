@@ -32,6 +32,7 @@ dependencies:
 
 
 
+  sneaker_app: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
