@@ -31,3 +31,7 @@ class TImages {
   static const String verifyIllustration =
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
 }
+
+// -- Category Icons
+  static const String shoeIcon =
+      "assets/icons/categories/icon8-bowling-64.png";
