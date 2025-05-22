@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sneaker_app/screens/cart_screen.dart';
-import 'package:sneaker_app/screens/profile_screen.dart';
-import 'package:sneaker_app/screens/setting_screen.dart';
-import 'package:sneaker_app/widgets/bottom_nav.dart';
+import 'package:sneakerhead/screens/cart_screen.dart';
+import 'package:sneakerhead/screens/profile_screen.dart';
+import 'package:sneakerhead/screens/setting_screen.dart';
+import 'package:sneakerhead/widgets/bottom_nav.dart';
+
+import '../features/authentication/screens/settings/settings.dart';
+import '../screens/cart_screen.dart';
+import '../screens/profile_screen.dart';
+import '../widgets/bottom_nav.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});

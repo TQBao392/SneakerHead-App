@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:sneakerhead/common/widgets/appbar/appbar.dart';
-import 'package:sneakerhead/common/widgets/custom_shapes/containers/primary_header_container.dart';
-import 'package:sneakerhead/screens/home/widgets/home_appbar.dart';
-import 'package:sneakerhead/utils/constants/colors.dart';
-import 'package:sneakerhead/utils/constants/text_strings.dart';
+import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'widgets/home_appbar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +16,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   THomeAppBar(),
                 ],
-              ),
+              )
             ),
           ],
         ),
@@ -28,4 +24,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 

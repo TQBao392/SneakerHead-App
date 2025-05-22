@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
-import 'package:sneakerhead/features/shop/screens/home.dart';
+import 'package:sneakerhead/features/shop/screens/home/home.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/helpers/helper_functions.dart';
 
