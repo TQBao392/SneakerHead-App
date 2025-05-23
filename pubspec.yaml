@@ -21,9 +21,12 @@ dependencies:
   http: ^1.1.0
   intl: 0.20.2
   logger: ^2.0.1
+  lottie: ^2.7.0
   url_launcher: ^6.1.12
-  flutter_native_splash: ^2.4.6
+  connectivity_plus: ^5.0.1
+  flutter_native_splash: ^2.4.0
   smooth_page_indicator: ^1.2.1
+
   # Icons
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.2
@@ -32,10 +35,15 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.1.1
 
+  #Product Specifics
+  carousel_slider: ^5.0.0
+  flutter_rating_bar: 4.0.1
+
   # Firebase
   firebase_core: ^3.13.1
-  device_preview: ^1.2.0
-  responsive_framework: ^1.5.1
+  firebase_auth: ^5.5.4
+  cloud_firestore: ^5.6.8
+
 
 
 
