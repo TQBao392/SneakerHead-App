@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
-import 'package:sneakerhead/common/widgets/login_signup/form_divider.dart';
-import 'package:sneakerhead/common/widgets/login_signup/social_buttons.dart';
-import 'package:sneakerhead/features/authentication/screens/signup/widgets/signup_form.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
-import 'package:sneakerhead/utils/constants/text_strings.dart';
+import '../../../../common/widgets/login_signup/form_divider.dart';
+import '../../../../common/widgets/login_signup/social_buttons.dart';
+import '../../../../features/authentication/screens/signup/widgets/signup_form.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/text_strings.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

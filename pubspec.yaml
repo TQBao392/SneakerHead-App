@@ -19,7 +19,7 @@ dependencies:
 
   # Utility Packages
   http: ^1.1.0
-  intl: ^0.19.0
+  intl: 0.20.2
   logger: ^2.0.1
   url_launcher: ^6.1.12
   flutter_native_splash: ^2.4.6
