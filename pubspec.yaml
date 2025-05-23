@@ -15,9 +15,11 @@ dependencies:
     sdk: flutter
 
 
+
+
   # Utility Packages
   http: ^1.1.0
-  intl: ^0.20.2
+  intl: ^0.19.0
   logger: ^2.0.1
   url_launcher: ^6.1.12
   flutter_native_splash: ^2.4.6
@@ -32,6 +34,8 @@ dependencies:
 
   # Firebase
   firebase_core: ^3.13.1
+  device_preview: ^1.2.0
+  responsive_framework: ^1.5.1
 
 
 
