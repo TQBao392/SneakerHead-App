@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:sneakerhead/features/authentication/controllers.singup/signup_controller.dart';
+import 'package:sneakerhead/features/authentication/controllers_signup/signup_controller.dart';
 import 'package:sneakerhead/features/authentication/screens/signup/verify_email.dart';
 import 'package:sneakerhead/features/authentication/screens/signup/widgets/terms_condition_checkbox.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
