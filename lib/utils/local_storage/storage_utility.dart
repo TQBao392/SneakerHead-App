@@ -32,7 +32,6 @@ class TLocalStorage {
   }
 }
 
-
 /// *** *** *** *** *** Example *** *** *** *** *** ///
 
 // LocalStorage localStorage = LocalStorage();
@@ -49,4 +48,3 @@ class TLocalStorage {
 //
 // // Clear all data
 // localStorage.clearAll();
-
