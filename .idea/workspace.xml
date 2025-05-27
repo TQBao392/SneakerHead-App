@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="36063742-6fc4-49c2-a3af-6ec8eed53a71" name="Changes" comment="fix signup controller">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-hdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-mdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-hdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-hdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-mdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-mdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-v21/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-v21/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxxhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night-xxxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-night/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/android12splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-xxxhdpi/splash.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night-v31/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-v31/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-LightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-MediumItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-SemiBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/coolvetica_regular.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/coolvetica_regular_italic.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/acer_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/adidas-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/apple-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/herman-miller-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/ikea_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/jordan-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/kenwood-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/nike.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/puma-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/brands/zara-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-bowling-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-cosmetics-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-dining-chair-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-dog-heart-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-school-uniform-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-shoes-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-smartphone-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-sparkling-diamond-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-tailors-dummy-64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/categories/icons8-wooden-toy-car-50.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/apple-pay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/credit-card.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/google-pay.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/master-card.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/paypal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/paystack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/paytm.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/successful_payment_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icons/payment_methods/visa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/104368-thank-you.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/110052-paper-plane.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/120978-payment-successful.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/136491-animation-lottie-car-rides.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/140429-pencil-drawing.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/141397-loading-juggle.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/141594-animation-of-docer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/53207-empty-file.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/67263-security-icon-transparent.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/72462-check-register.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/72785-searching.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/98783-packaging-in-progress.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/cloud-uploading-animation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/lady-adding-product-in-cart-animation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/loader-animation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/order-complete-car-delivery-animation.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-come-back-later.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-man-receives-a-mail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-sale.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-success.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/animations/sammy-line-workout.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/banners/banner_8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/content/user.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/on_boarding_images/sammy-line-delivery.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/on_boarding_images/sammy-line-no-connection.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/on_boarding_images/sammy-line-searching.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/on_boarding_images/sammy-line-shopping.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/Adidas_Football.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJOrdonBlackRed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJOrdonOrange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJOrdonWhiteRed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJordonSingleBlue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJordonSingleOrange.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirJordonwhiteMagenta.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeAirMax.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeBasketballShoeGreenBlack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/NikeWildhorse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_var_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_var_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_var_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/acer_laptop_var_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/baseball_bat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_bed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_bed_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_bed_grey.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_bed_simple_brown.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_bed_with_comforter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_lamp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_sofa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/bedroom_wardrobe.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/cricket_bat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone8_mobile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone8_mobile_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone8_mobile_dual_side.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone8_mobile_front.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_12_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_12_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_12_green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_12_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_13_pro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_14_pro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/iphone_14_white.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/kitchen_counter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/kitchen_dining table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/kitchen_refrigerator.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/leather_jacket_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/leather_jacket_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/leather_jacket_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/leather_jacket_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/nike-shoes.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/office_chair_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/office_chair_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/office_desk_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/office_desk_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-jacket.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-jeans.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-shirt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-shirt_blue_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-shirt_blue_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/product-slippers.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/promo-banner-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/promo-banner-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/promo-banner-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/samsung_s9_mobile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/samsung_s9_mobile_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/samsung_s9_mobile_withback.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/slipper-product-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/slipper-product-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/slipper-product-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/slipper-product.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tennis_racket.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tomi_dogfood.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tracksuit_black.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tracksuit_blue.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tracksuit_red.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/trcksuit_parrotgreen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_blue_collar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_blue_without_collar_back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_blue_without_collar_front.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_green_collar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_red_collar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/tshirt_yellow_collar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/products/user_img.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/reviews/review_profile_image_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/reviews/review_profile_image_2.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/reviews/review_profile_image_3.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/logos/facebook-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/logos/google-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchBackground.imageset/darkbackground.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImageDark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImageDark@2x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImageDark@3x.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/app.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/api_constants.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/colors.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/enums.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/image_strings.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/sizes.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants/text_strings.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/device/device_utility.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/formatters/formatter.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/helpers/helper_functions.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/helpers/network_manager.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/helpers/pricing_calculator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/http/http_client.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/local_storage/storage_utility.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/logging/logger.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/popups/full_screen_loader.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/theme/theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/validators/validation.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/splash.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/manifest.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="tk" />
+                <branch-info repo="$PROJECT_DIR$" source="tk" />
+                <branch-info repo="$PROJECT_DIR$" source="tk" />
+                <branch-info repo="$PROJECT_DIR$" source="tk" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Bottom-Navigation" />
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;boxian6592-del&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/TQBao392/SneakerHead-App.git&quot;,
+    &quot;accountId&quot;: &quot;6fcdb5c7-9646-4dbe-a32d-4defbeb4af2b&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;TQBao392&quot;,
+    &quot;repository&quot;: &quot;SneakerHead-App&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2xAyfx3fNVYkc9c8HGKbENdmcLl" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.cart_screen.dart.executor": "Run",
+    "Flutter.main.dart.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "tk",
+    "ignore.virus.scanning.warn.message": "true",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Sneakerhead",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "show.migrate.to.gradle.popup": "false",
+    "structure.view.defaults.are.configured": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sneakerhead\lib\common\widgets\layouts" />
+      <recent name="D:\sneakerhead\lib\common\widgets\icons" />
+      <recent name="D:\sneakerhead\lib\screens" />
+      <recent name="D:\sneakerhead\lib\features\authentication\screens\order" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart">
+    <configuration name="cart_screen.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/lib/screens/cart_screen.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.cart_screen.dart" />
+        <item itemvalue="Flutter.cart_screen.dart" />
+        <item itemvalue="Flutter.cart_screen.dart" />
+        <item itemvalue="Flutter.cart_screen.dart" />
+        <item itemvalue="Flutter.cart_screen.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="36063742-6fc4-49c2-a3af-6ec8eed53a71" name="Changes" comment="" />
+      <created>1747395279513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1747395279513</updated>
+    </task>
+    <task id="LOCAL-00001" summary="bit">
+      <option name="closed" value="true" />
+      <created>1747472417152</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747472417152</updated>
+    </task>
+    <task id="LOCAL-00002" summary="orderscreen">
+      <option name="closed" value="true" />
+      <created>1747474915136</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747474915136</updated>
+    </task>
+    <task id="LOCAL-00003" summary="orderscreen">
+      <option name="closed" value="true" />
+      <created>1747499509524</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747499509524</updated>
+    </task>
+    <task id="LOCAL-00004" summary="appbar">
+      <option name="closed" value="true" />
+      <created>1747504525847</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1747504525847</updated>
+    </task>
+    <task id="LOCAL-00005" summary="home">
+      <option name="closed" value="true" />
+      <created>1747561509300</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747561509300</updated>
+    </task>
+    <task id="LOCAL-00006" summary="cart menu">
+      <option name="closed" value="true" />
+      <created>1747565149208</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1747565149208</updated>
+    </task>
+    <task id="LOCAL-00007" summary="order screen">
+      <option name="closed" value="true" />
+      <created>1747593615924</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747593615924</updated>
+    </task>
+    <task id="LOCAL-00008" summary="product card">
+      <option name="closed" value="true" />
+      <created>1747596361684</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1747596361684</updated>
+    </task>
+    <task id="LOCAL-00009" summary="product card">
+      <option name="closed" value="true" />
+      <created>1747758124979</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1747758124979</updated>
+    </task>
+    <task id="LOCAL-00010" summary="product card">
+      <option name="closed" value="true" />
+      <created>1747761025476</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747761025476</updated>
+    </task>
+    <task id="LOCAL-00011" summary="product card">
+      <option name="closed" value="true" />
+      <created>1747761227853</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1747761227853</updated>
+    </task>
+    <task id="LOCAL-00012" summary="all product screen">
+      <option name="closed" value="true" />
+      <created>1747819238239</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1747819238239</updated>
+    </task>
+    <task id="LOCAL-00013" summary="all product screen">
+      <option name="closed" value="true" />
+      <created>1747867310223</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1747867310223</updated>
+    </task>
+    <task id="LOCAL-00014" summary="all brand screen">
+      <option name="closed" value="true" />
+      <created>1747868526751</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1747868526751</updated>
+    </task>
+    <task id="LOCAL-00015" summary="sửa import tuyệt đối thành tương đối">
+      <option name="closed" value="true" />
+      <created>1747870338532</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1747870338532</updated>
+    </task>
+    <task id="LOCAL-00016" summary="order screen, sub categories, view all product screen,...">
+      <option name="closed" value="true" />
+      <created>1747872664057</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1747872664057</updated>
+    </task>
+    <task id="LOCAL-00017" summary="firebase">
+      <option name="closed" value="true" />
+      <created>1748020956914</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748020956914</updated>
+    </task>
+    <task id="LOCAL-00018" summary="device preview">
+      <option name="closed" value="true" />
+      <created>1748023680345</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748023680345</updated>
+    </task>
+    <task id="LOCAL-00019" summary="password authentication">
+      <option name="closed" value="true" />
+      <created>1748031415129</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748031415129</updated>
+    </task>
+    <task id="LOCAL-00020" summary="email password authentication">
+      <option name="closed" value="true" />
+      <created>1748039655466</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748039655467</updated>
+    </task>
+    <task id="LOCAL-00021" summary="email password authentication">
+      <option name="closed" value="true" />
+      <created>1748358481502</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1748358481502</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fix signup controller">
+      <option name="closed" value="true" />
+      <created>1748358964306</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1748358964306</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="bit" />
+    <MESSAGE value="orderscreen" />
+    <MESSAGE value="appbar" />
+    <MESSAGE value="home" />
+    <MESSAGE value="cart menu" />
+    <MESSAGE value="order screen" />
+    <MESSAGE value="product card" />
+    <MESSAGE value="all product screen" />
+    <MESSAGE value="all brand screen" />
+    <MESSAGE value="sửa import tuyệt đối thành tương đối" />
+    <MESSAGE value="order screen, sub categories, view all product screen,..." />
+    <MESSAGE value="firebase" />
+    <MESSAGE value="device preview" />
+    <MESSAGE value="password authentication" />
+    <MESSAGE value="email password authentication" />
+    <MESSAGE value="fix signup controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix signup controller" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/all_products/all_products.dart</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/common/widgets/custom_shapes/containers/circular_container.dart</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/screens/order/order.dart</url>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/data/repositories.authentication/authentication_repository.dart</url>
+          <line>24</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="Dart">
+          <url>file://$PROJECT_DIR$/lib/features/authentication/screens/signup/widgets/signup_form.dart</url>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
