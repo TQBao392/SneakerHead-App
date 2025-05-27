@@ -8,9 +8,9 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class SettingsScreenState extends State<SettingsScreen> {
-  bool geolocation = true;
-  bool safeMode = false;
-  bool hdImageQuality = false;
+  bool receivePromotions = true;
+  bool darkMode = false;
+  bool useHighResImages = true;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +22,10 @@ class SettingsScreenState extends State<SettingsScreen> {
         unselectedItemColor: Colors.grey,
         currentIndex: 3,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.store),
-            label: 'Store',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Shop'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'Wishlist'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
       body: Column(
@@ -69,20 +57,14 @@ class SettingsScreenState extends State<SettingsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Coding with T',
+                        'John Sneakerhead',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                            color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'support@codingwithT.com',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
+                        'john.sneaker@example.com',
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                     ],
                   ),
@@ -106,91 +88,77 @@ class SettingsScreenState extends State<SettingsScreen> {
                 children: [
                   const SizedBox(height: 16),
                   const Text(
-                    'Account Settings',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    'Shopping Preferences',
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   _buildTile(
-                    icon: Icons.location_on_outlined,
-                    title: 'My Addresses',
-                    subtitle: 'Set shopping delivery address',
-                  ),
-                  _buildTile(
-                    icon: Icons.shopping_cart_outlined,
-                    title: 'My Cart',
-                    subtitle: 'Add, remove products and move to checkout',
-                  ),
-                  _buildTile(
-                    icon: Icons.list_alt_outlined,
+                    icon: Icons.shopping_bag,
                     title: 'My Orders',
-                    subtitle: 'In-progress and Completed Orders',
+                    subtitle: 'Track past and current orders',
                   ),
                   _buildTile(
-                    icon: Icons.account_balance_outlined,
-                    title: 'Bank Account',
-                    subtitle: 'Withdraw balance to registered bank account',
+                    icon: Icons.credit_card,
+                    title: 'Payment Methods',
+                    subtitle: 'Manage credit cards and other payment options',
                   ),
                   _buildTile(
-                    icon: Icons.card_giftcard,
+                    icon: Icons.local_shipping,
+                    title: 'Delivery Settings',
+                    subtitle: 'Preferred delivery times and locations',
+                  ),
+                  _buildTile(
+                    icon: Icons.location_on,
+                    title: 'Saved Addresses',
+                    subtitle: 'Manage shipping addresses',
+                  ),
+                  _buildTile(
+                    icon: Icons.discount,
                     title: 'My Coupons',
-                    subtitle: 'List of all discounted coupons',
+                    subtitle: 'Available promo codes and offers',
                   ),
                   _buildTile(
-                    icon: Icons.notifications_outlined,
-                    title: 'Notifications',
-                    subtitle: 'Set any kind of notification message',
+                    icon: Icons.favorite,
+                    title: 'Wishlist',
+                    subtitle: 'Shoes you’ve liked',
                   ),
-                  _buildTile(
-                    icon: Icons.lock_outline,
-                    title: 'Account Privacy',
-                    subtitle: 'Manage data usage and connected accounts',
-                  ),
+
                   const SizedBox(height: 24),
                   const Text(
                     'App Settings',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  _buildTile(
-                    icon: Icons.cloud_upload_outlined,
-                    title: 'Load Data',
-                    subtitle: 'Upload Data to your Cloud Firebase',
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeColor: Colors.purpleAccent,
+                    title: const Text('Receive Promotions', style: TextStyle(color: Colors.white)),
+                    subtitle: const Text('Get updates on new releases and sales',
+                        style: TextStyle(color: Colors.white60)),
+                    value: receivePromotions,
+                    onChanged: (val) => setState(() => receivePromotions = val),
+                    secondary: const Icon(Icons.notifications_active, color: Colors.purpleAccent),
                   ),
                   SwitchListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                    contentPadding: EdgeInsets.zero,
                     activeColor: Colors.purpleAccent,
-                    title: const Text('Geolocation', style: TextStyle(color: Colors.white)),
-                    subtitle: const Text('Set recommendation based on location', style: TextStyle(color: Colors.white60)),
-                    value: geolocation,
-                    onChanged: (val) => setState(() => geolocation = val),
-                    secondary: const Icon(Icons.gps_fixed, color: Colors.purpleAccent),
+                    title: const Text('Dark Mode', style: TextStyle(color: Colors.white)),
+                    subtitle: const Text('Switch app theme', style: TextStyle(color: Colors.white60)),
+                    value: darkMode,
+                    onChanged: (val) => setState(() => darkMode = val),
+                    secondary: const Icon(Icons.dark_mode, color: Colors.purpleAccent),
                   ),
                   SwitchListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+                    contentPadding: EdgeInsets.zero,
                     activeColor: Colors.purpleAccent,
-                    title: const Text('Safe Mode', style: TextStyle(color: Colors.white)),
-                    subtitle: const Text('Search result is safe for all ages', style: TextStyle(color: Colors.white60)),
-                    value: safeMode,
-                    onChanged: (val) => setState(() => safeMode = val),
-                    secondary: const Icon(Icons.shield, color: Colors.purpleAccent),
-                  ),
-                  SwitchListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                    activeColor: Colors.purpleAccent,
-                    title: const Text('HD Image Quality', style: TextStyle(color: Colors.white)),
-                    subtitle: const Text('Set image quality to be seen', style: TextStyle(color: Colors.white60)),
-                    value: hdImageQuality,
-                    onChanged: (val) => setState(() => hdImageQuality = val),
+                    title: const Text('HD Images', style: TextStyle(color: Colors.white)),
+                    subtitle:
+                    const Text('Show product images in high quality', style: TextStyle(color: Colors.white60)),
+                    value: useHighResImages,
+                    onChanged: (val) => setState(() => useHighResImages = val),
                     secondary: const Icon(Icons.hd, color: Colors.purpleAccent),
                   ),
+
                   const SizedBox(height: 32),
                   Center(
                     child: OutlinedButton(
@@ -199,7 +167,9 @@ class SettingsScreenState extends State<SettingsScreen> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 12),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        // TODO: Add logout logic
+                      },
                       child: const Text('Logout', style: TextStyle(color: Colors.white)),
                     ),
                   ),

@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:sneakerhead/data/repositories.authentication/authentication_repository.dart';
+import 'package:t_store/features/authentication/screens/settings/settings.dart';
+import 'features/authentication/screens/profile/profile_screen.dart';
 
-import 'app.dart';
-import 'package:firebase_core/firebase_core.dart';
+void main() {
+  runApp(const MyApp());
+}
 
-import 'firebase_options.dart';
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-
-Future<void> main() async {
-
-  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-  await GetStorage.init();
-
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then(
-      (FirebaseApp value) => Get.put(AuthenticationRepository()),
-  );
-
-
-  runApp(const App());
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home:  SettingsScreen(),
+    );
+  }
 }
