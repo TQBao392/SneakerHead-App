@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t_store/utils/constants/colors.dart';
+import 'package:sneakerhead/utils/constants/colors.dart';
 import '../../constants/sizes.dart';
 
 class TTextFormFieldTheme {
