@@ -53,7 +53,7 @@ class TProductCardVertical extends StatelessWidget {
                     top: 12,
                     child: TRoundedContainer(
                       radius: TSizes.sm,
-                      backgroundColor: TColors.secondary.withOpacity(0.8),
+                      backgroundColor: TColors.secondary.withAlpha((0.8 * 255).toInt()),
                       padding: const EdgeInsets.symmetric(
                         horizontal: TSizes.sm,
                         vertical: TSizes.xs,
@@ -92,12 +92,22 @@ class TProductCardVertical extends StatelessWidget {
                           const SizedBox(width: TSizes.xs),
                           const Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconXs),
                         ],
-                      ),     
+                      ),  
+                    ],
+                      ),
+                  ),
+                  /// Add Spacer() to keep the height of each box same 
+                  const Spacer(),
+
+                      /// Price Row   
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           /// Price
-                          const TProductPriceText(price: '950.000'),
+                          const Padding(
+                            padding: EdgeInsets.only(left: TSizes.sm),
+                            child: TProductPriceText(price: '950.000'),
+                          ),
                           
                           /// Add to Cart Button
                           Container(
@@ -115,10 +125,7 @@ class TProductCardVertical extends StatelessWidget {
                               ),
                           )
                         ]
-                      )
-                    ],
-                      ),
-                  ) 
+                      ) 
           ],
         ),
       ),
