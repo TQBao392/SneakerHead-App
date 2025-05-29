@@ -1,9 +1,12 @@
+// ignore_for_file: unused_import
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
+import 'package:sneakerhead/common/widgets/layouts/grid_layout.dart';
 import 'package:sneakerhead/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:sneakerhead/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:sneakerhead/features/shop/screens/home/widgets/promo_slider.dart';
@@ -69,11 +72,12 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ///--Promo Slider
-                  TPromoSlider(banners: [TImages.promoBanner1, TImages.promoBanner2, TImages.promoBanner3],),
-                  SizedBox(height: TSizes.spaceBtwSections),
+                  const TPromoSlider(banners: [TImages.promoBanner1, TImages.promoBanner2, TImages.promoBanner3],),
+                  const SizedBox(height: TSizes.spaceBtwSections),
                   
                   ///--Popular Products
-                  TProductCardVertical(),
+                  TGridLayout(itemCount: 2, itemBuilder: (_, index) => const TProductCardVertical()
+                  )
                 ]
               )
             ),

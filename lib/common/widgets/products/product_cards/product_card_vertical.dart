@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -5,7 +7,7 @@ import 'package:sneakerhead/common/styles/shadows.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:sneakerhead/common/widgets/icons/t_circular_icon.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
-import 'package:sneakerhead/common/widgets/icons/t_circular_icon.dart';
+import 'package:sneakerhead/common/widgets/texts/product_price_text.dart';
 import 'package:sneakerhead/common/widgets/texts/product_title_text.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/image_strings.dart';
@@ -95,12 +97,9 @@ class TProductCardVertical extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           /// Price
-                          Text(
-                            '950.000đ',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
+                          const TProductPriceText(price: '950.000'),
+                          
+                          /// Add to Cart Button
                           Container(
                             decoration: const BoxDecoration(
                               color: TColors.dark,
