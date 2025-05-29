@@ -4,6 +4,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:sneakerhead/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:sneakerhead/common/widgets/images/t_rounded_image.dart';
+import 'package:sneakerhead/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:sneakerhead/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:sneakerhead/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:sneakerhead/utils/device/device_utility.dart';
@@ -68,7 +69,11 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ///--Promo Slider
-                  TPromoSlider(banners: [TImages.promoBanner1, TImages.promoBanner2, TImages.promoBanner3],)
+                  TPromoSlider(banners: [TImages.promoBanner1, TImages.promoBanner2, TImages.promoBanner3],),
+                  SizedBox(height: TSizes.spaceBtwSections),
+                  
+                  ///--Popular Products
+                  TProductCardVertical(),
                 ]
               )
             ),
