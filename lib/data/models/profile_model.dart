@@ -7,6 +7,7 @@ class Profile {
   final String gender;
   final String dob;
   final String avatarUrl;
+  final String? address; // Added address field
 
   Profile({
     required this.name,
@@ -17,18 +18,34 @@ class Profile {
     required this.gender,
     required this.dob,
     required this.avatarUrl,
+    this.address,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
-      name: json['name'],
-      username: json['username'],
-      userId: json['userId'],
-      email: json['email'],
-      phoneNumber: json['phoneNumber'],
-      gender: json['gender'],
-      dob: json['dob'],
-      avatarUrl: json['avatarUrl'],
+      name: json['name'] as String,
+      username: json['username'] as String,
+      userId: json['userId'] as String,
+      email: json['email'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      gender: json['gender'] as String,
+      dob: json['dob'] as String,
+      avatarUrl: json['avatarUrl'] as String,
+      address: json['address'] as String?, // Handle nullable address
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'username': username,
+      'userId': userId,
+      'email': email,
+      'phoneNumber': phoneNumber,
+      'gender': gender,
+      'dob': dob,
+      'avatarUrl': avatarUrl,
+      'address': address,
+    };
   }
 }

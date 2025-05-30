@@ -5,7 +5,6 @@ class ProfileService {
 
   Future<Profile> getUserProfile() async {
     await Future.delayed(const Duration(seconds: 2));
-
     _currentProfile ??= Profile(
       name: 'Alex Johnson',
       username: 'alex_sneakerhead',
@@ -15,23 +14,20 @@ class ProfileService {
       gender: 'Male',
       dob: '1992-07-15',
       avatarUrl: 'assets/images/avatar.png',
+      address: 'South Liana, Maine 87695, USA', // Default address
     );
-
     print('Fetched profile: $_currentProfile');
     return _currentProfile!;
   }
 
   Future<void> updateUserProfile(Profile updatedProfile) async {
     await Future.delayed(const Duration(seconds: 1));
-
-    // Relaxed validation to align with EditProfileScreen
     if (updatedProfile.userId != _currentProfile?.userId) {
       throw Exception('User ID cannot be changed');
     }
     if (updatedProfile.username != _currentProfile?.username) {
       throw Exception('Username cannot be changed');
     }
-
     print('Updating profile: $updatedProfile');
     _currentProfile = updatedProfile;
   }

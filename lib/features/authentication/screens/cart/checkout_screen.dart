@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/data/models/profile_model.dart';
+import 'package:t_store/features/profile/services/profile_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -67,18 +69,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   bool isLoading = true;
   String? errorMessage;
   final promoController = TextEditingController();
+  final ProfileService _profileService = ProfileService();
+  Profile? _profile;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    _fetchData();
   }
 
-  // Mock data fetching function (replace with real API call if needed)
-  Future<void> fetchData() async {
+  Future<void> _fetchData() async {
     try {
-      // Simulate network delay
       await Future.delayed(const Duration(seconds: 1));
+      final profile = await _profileService.getUserProfile();
       setState(() {
         items = [
           CartItem(
@@ -99,6 +102,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         subtotal = items.fold(0, (sum, item) => sum + item.price * item.quantity);
         shippingFee = 6.0;
         taxFee = 6.0;
+        _profile = profile;
         isLoading = false;
       });
     } catch (e) {
@@ -119,6 +123,41 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         const SnackBar(content: Text('Invalid promo code')),
       );
     }
+  }
+
+  void _handleCheckout() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Checkout successful!'),
+        backgroundColor: Color(0xFF0A84FF),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    setState(() {
+      items = [];
+      subtotal = 0.0;
+      shippingFee = 0.0;
+      taxFee = 0.0;
+      promoDiscount = 0.0;
+      promoController.clear();
+      _profile = null;
+    });
+
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/',
+            (route) => false,
+      );
+    });
+  }
+
+  void _updateShippingAddress(Profile updatedProfile) {
+    print('Updating shipping address: ${updatedProfile.address}');
+    setState(() {
+      _profile = updatedProfile;
+    });
   }
 
   double get orderTotal => subtotal + shippingFee + taxFee - promoDiscount;
@@ -153,11 +192,12 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      'https://placehold.co/60x60/png?text=Shoes',
+                      'https://picsum.photos/60/60', // Replaced placeholder
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
+                        print('Image load error: $error');
                         return Container(
                           width: 60,
                           height: 60,
@@ -205,7 +245,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               ),
             );
           }),
-          // Promo code
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
@@ -240,7 +279,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          // Summary fees
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -259,7 +297,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          // Payment Method
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -276,10 +313,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Row(
             children: [
               Image.network(
-                'https://via.placeholder.com/32x32.png?text=PayPal',
+                'https://picsum.photos/32/32', // Replaced placeholder
                 width: 32,
                 height: 32,
                 errorBuilder: (context, error, stackTrace) {
+                  print('PayPal image load error: $error');
                   return const Icon(Icons.payment, size: 32, color: Colors.grey);
                 },
               ),
@@ -288,7 +326,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ],
           ),
           const SizedBox(height: 24),
-          // Shipping Address
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -296,30 +333,46 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold)),
               TextButton(
                 onPressed: () {
-                  // TODO: change address
+                  if (_profile != null) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditAddressScreen(
+                          profile: _profile!,
+                          onSave: _updateShippingAddress,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 child: const Text('Change'),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          const Text('Coding with T'),
+          Text(_profile?.name ?? 'Loading...'),
           const SizedBox(height: 4),
           Row(
-            children: const [
-              Icon(Icons.phone, size: 16, color: Colors.grey),
-              SizedBox(width: 4),
-              Text('+92-317-8059525', style: TextStyle(color: Colors.grey)),
+            children: [
+              const Icon(Icons.phone, size: 16, color: Colors.grey),
+              const SizedBox(width: 4),
+              Text(
+                _profile?.phoneNumber ?? 'Loading...',
+                style: const TextStyle(color: Colors.grey),
+              ),
             ],
           ),
           const SizedBox(height: 4),
           Row(
-            children: const [
-              Icon(Icons.location_on, size: 16, color: Colors.grey),
-              SizedBox(width: 4),
+            children: [
+              const Icon(Icons.location_on, size: 16, color: Colors.grey),
+              const SizedBox(width: 4),
               Expanded(
-                  child: Text('South Liana, Maine 87695, USA',
-                      style: TextStyle(color: Colors.grey))),
+                child: Text(
+                  _profile?.address ?? 'Loading...',
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 32),
@@ -328,9 +381,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/success');
-          },
+          onPressed: _handleCheckout,
           child: Text('Checkout \$${orderTotal.toStringAsFixed(1)}'),
         ),
       ),
@@ -354,6 +405,165 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 fontWeight: isTotal ? FontWeight.bold : FontWeight.normal),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class EditAddressScreen extends StatefulWidget {
+  final Profile profile;
+  final Function(Profile) onSave;
+
+  const EditAddressScreen({
+    super.key,
+    required this.profile,
+    required this.onSave,
+  });
+
+  @override
+  State<EditAddressScreen> createState() => _EditAddressScreenState();
+}
+
+class _EditAddressScreenState extends State<EditAddressScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final ProfileService _profileService = ProfileService();
+  late TextEditingController _nameController;
+  late TextEditingController _phoneController;
+  late TextEditingController _addressController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.profile.name);
+    _phoneController = TextEditingController(text: widget.profile.phoneNumber);
+    _addressController = TextEditingController(text: widget.profile.address);
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _addressController.dispose();
+    super.dispose();
+  }
+
+  void _saveAddress() async {
+    print('Save address button pressed');
+    if (_formKey.currentState!.validate()) {
+      print('Form validation passed');
+      final updatedProfile = Profile(
+        name: _nameController.text,
+        username: widget.profile.username,
+        userId: widget.profile.userId,
+        email: widget.profile.email,
+        phoneNumber: _phoneController.text,
+        gender: widget.profile.gender,
+        dob: widget.profile.dob,
+        avatarUrl: widget.profile.avatarUrl,
+        address: _addressController.text,
+      );
+      try {
+        print('Updating profile with: $updatedProfile');
+        await _profileService.updateUserProfile(updatedProfile);
+        widget.onSave(updatedProfile);
+        if (mounted) {
+          print('Showing success SnackBar');
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Address updated successfully')),
+          );
+          await Future.delayed(const Duration(seconds: 1)); // Ensure SnackBar is visible
+          Navigator.pop(context);
+          print('Navigated back to CheckoutScreen');
+        }
+      } catch (e) {
+        print('Error updating profile: $e');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error updating address: $e')),
+          );
+        }
+      }
+    } else {
+      print('Form validation failed');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please correct the form errors')),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Shipping Address'),
+        actions: [
+          TextButton(
+            onPressed: _saveAddress,
+            child: const Text(
+              'Save',
+              style: TextStyle(color: Color(0xFF0A84FF), fontSize: 16),
+            ),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) =>
+                value!.isEmpty ? 'Name cannot be empty' : null,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _phoneController,
+                decoration: const InputDecoration(
+                  labelText: 'Phone Number',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.phone,
+                validator: (value) {
+                  if (value!.isEmpty) return 'Phone number cannot be empty';
+                  // Relaxed validation
+                  if (!RegExp(r'^\+?\d{8,15}$').hasMatch(value.replaceAll(RegExp(r'\s|-'), ''))) {
+                    return 'Enter a valid phone number';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _addressController,
+                decoration: const InputDecoration(
+                  labelText: 'Address',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3,
+                validator: (value) =>
+                value!.isEmpty ? 'Address cannot be empty' : null,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: _saveAddress,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0A84FF),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Save Address'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
