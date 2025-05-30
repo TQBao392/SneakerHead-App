@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cart Demo',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: const Color(0xFF121212),
-        colorScheme: ColorScheme.dark(
-          primary: const Color(0xFF0A84FF),
-        ),
-      ),
-      home: const CartScreen(),
-    );
-  }
-}
-
 class CartItem {
   final String brand;
   final String title;
@@ -46,20 +24,19 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-
   final List<CartItem> _items = List.generate(
     5,
         (_) => CartItem(
       brand: 'Nike',
-      title: 'Black Sports shoes',
+      title: 'Black Sports Shoes',
       details: 'Color Green   Size UK 08',
       price: 256.0,
       quantity: 2,
     ),
   );
 
-  double get _totalPrice => _items.fold(
-      0, (sum, item) => sum + item.price * item.quantity);
+  double get _totalPrice =>
+      _items.fold(0, (sum, item) => sum + item.price * item.quantity);
 
   void _increment(int index) {
     setState(() {
@@ -72,6 +49,20 @@ class _CartScreenState extends State<CartScreen> {
       if (_items[index].quantity > 1) {
         _items[index].quantity--;
       }
+    });
+  }
+
+  void _addItem() {
+    setState(() {
+      _items.add(
+        CartItem(
+          brand: 'Adidas',
+          title: 'White Sneakers',
+          details: 'Color White   Size UK 09',
+          price: 199.0,
+          quantity: 1,
+        ),
+      );
     });
   }
 
@@ -103,18 +94,29 @@ class _CartScreenState extends State<CartScreen> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Ảnh placeholder
+                // Image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    'https://via.placeholder.com/60x60.png?text=Shoes',
+                    'https://placehold.co/60x60/png?text=Shoes',
                     width: 60,
                     height: 60,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 60,
+                        height: 60,
+                        color: Colors.grey,
+                        child: const Icon(Icons.error, color: Colors.red),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 12),
+
+                // Expanded middle section
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +144,11 @@ class _CartScreenState extends State<CartScreen> {
                       const SizedBox(height: 4),
                       Text(
                         item.title,
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(
+                          fontSize: 14,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        maxLines: 1,
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -150,40 +156,45 @@ class _CartScreenState extends State<CartScreen> {
                         style: const TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
+                          overflow: TextOverflow.ellipsis,
                         ),
+                        maxLines: 1,
+                      ),
+                      const SizedBox(height: 8),
+                      // Quantity controls
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () => _decrement(index),
+                            borderRadius: BorderRadius.circular(4),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Icon(Icons.remove, size: 20),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            '${item.quantity}',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                          const SizedBox(width: 6),
+                          InkWell(
+                            onTap: () => _increment(index),
+                            borderRadius: BorderRadius.circular(4),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Icon(Icons.add, size: 20),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 12),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () => _decrement(index),
-                      borderRadius: BorderRadius.circular(4),
-                      child: const Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Icon(Icons.remove, size: 20),
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      '${item.quantity}',
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                    const SizedBox(width: 6),
-                    InkWell(
-                      onTap: () => _increment(index),
-                      borderRadius: BorderRadius.circular(4),
-                      child: const Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Icon(Icons.add, size: 20),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(width: 12),
-                // Giá
+
+                const SizedBox(width: 8),
+
+                // Price
                 Text(
                   '\$${(item.price * item.quantity).toStringAsFixed(0)}',
                   style: const TextStyle(
@@ -201,8 +212,7 @@ class _CartScreenState extends State<CartScreen> {
         color: Colors.transparent,
         child: ElevatedButton(
           onPressed: () {
-            // Xử lý checkout
-            //Tạm
+            // Checkout logic
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF0A84FF),
@@ -216,6 +226,11 @@ class _CartScreenState extends State<CartScreen> {
             style: const TextStyle(fontSize: 16),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addItem,
+        backgroundColor: const Color(0xFF0A84FF),
+        child: const Icon(Icons.add_shopping_cart),
       ),
     );
   }

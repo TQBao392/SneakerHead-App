@@ -23,14 +23,13 @@ class MyApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF0A84FF),
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             padding: const EdgeInsets.symmetric(vertical: 16),
           ),
         ),
       ),
       routes: {
-        '/': (_) => const OrderReviewScreen(),
+        '/': (_) => const CheckoutScreen(),
         '/success': (_) => const PaymentSuccessScreen(),
       },
     );
@@ -38,36 +37,79 @@ class MyApp extends StatelessWidget {
 }
 
 class CartItem {
-  final String brand, title, details;
+  final String brand;
+  final String title;
+  final String details;
   final double price;
-  CartItem(this.brand, this.title, this.details, this.price);
+  final int quantity;
+
+  CartItem({
+    required this.brand,
+    required this.title,
+    required this.details,
+    required this.price,
+    required this.quantity,
+  });
 }
 
-class OrderReviewScreen extends StatefulWidget {
-  const OrderReviewScreen({super.key});
+class CheckoutScreen extends StatefulWidget {
+  const CheckoutScreen({super.key});
   @override
-  State<OrderReviewScreen> createState() => _OrderReviewScreenState();
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
 
-class _OrderReviewScreenState extends State<OrderReviewScreen> {
-  final List<CartItem> items = List.generate(
-    2,
-        (_) => CartItem(
-      'Nike',
-      'Black Sports shoes',
-      'Color Green   Size UK 08',
-      256.0,
-    ),
-  );
+class _CheckoutScreenState extends State<CheckoutScreen> {
+  List<CartItem> items = [];
+  double subtotal = 0.0;
+  double shippingFee = 0.0;
+  double taxFee = 0.0;
+  double promoDiscount = 0.0;
+  bool isLoading = true;
+  String? errorMessage;
   final promoController = TextEditingController();
 
-  double subtotal = 256.0 * 2;
-  double shippingFee = 6.0;
-  double taxFee = 6.0;
-  double promoDiscount = 0.0;
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  // Mock data fetching function (replace with real API call if needed)
+  Future<void> fetchData() async {
+    try {
+      // Simulate network delay
+      await Future.delayed(const Duration(seconds: 1));
+      setState(() {
+        items = [
+          CartItem(
+            brand: 'Nike',
+            title: 'Black Sports Shoes',
+            details: 'Color Green   Size UK 08',
+            price: 256.0,
+            quantity: 2,
+          ),
+          CartItem(
+            brand: 'Adidas',
+            title: 'White Sneakers',
+            details: 'Color White   Size UK 09',
+            price: 199.0,
+            quantity: 1,
+          ),
+        ];
+        subtotal = items.fold(0, (sum, item) => sum + item.price * item.quantity);
+        shippingFee = 6.0;
+        taxFee = 6.0;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Failed to load data: $e';
+        isLoading = false;
+      });
+    }
+  }
 
   void applyPromo() {
-    // ví dụ: mã "SAVE10"  10$
     if (promoController.text.trim().toUpperCase() == 'SAVE10') {
       setState(() {
         promoDiscount = 10.0;
@@ -79,15 +121,26 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     }
   }
 
-  double get orderTotal =>
-      subtotal + shippingFee + taxFee - promoDiscount;
+  double get orderTotal => subtotal + shippingFee + taxFee - promoDiscount;
 
   @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    if (errorMessage != null) {
+      return Scaffold(
+        body: Center(child: Text(errorMessage!)),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('Order Review'),
+        title: const Text('Checkout'),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -100,10 +153,18 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      'https://via.placeholder.com/60x60.png?text=Shoes',
+                      'https://placehold.co/60x60/png?text=Shoes',
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 60,
+                          height: 60,
+                          color: Colors.grey,
+                          child: const Icon(Icons.error, color: Colors.red),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -113,9 +174,10 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                       children: [
                         Row(
                           children: [
-                            Text(item.brand,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold)),
+                            Text(
+                              item.brand,
+                              style: const TextStyle(fontWeight: FontWeight.bold),
+                            ),
                             const SizedBox(width: 4),
                             Container(
                               width: 8,
@@ -130,18 +192,19 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                         const SizedBox(height: 4),
                         Text(item.title),
                         const SizedBox(height: 4),
-                        Text(item.details,
-                            style: const TextStyle(color: Colors.grey)),
+                        Text(
+                          '${item.details}   Quantity: ${item.quantity}',
+                          style: const TextStyle(color: Colors.grey),
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Text('\$${item.price.toStringAsFixed(0)}'),
+                  Text('\$${(item.price * item.quantity).toStringAsFixed(0)}'),
                 ],
               ),
             );
           }),
-
           // Promo code
           Container(
             padding: const EdgeInsets.symmetric(vertical: 8),
@@ -176,7 +239,6 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               ],
             ),
           ),
-
           const SizedBox(height: 16),
           // Summary fees
           Container(
@@ -190,16 +252,13 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
                 _buildFeeRow('Subtotal', subtotal),
                 _buildFeeRow('Shipping Fee', shippingFee),
                 _buildFeeRow('Tax Fee', taxFee),
-                if (promoDiscount > 0)
-                  _buildFeeRow('Discount', -promoDiscount),
+                if (promoDiscount > 0) _buildFeeRow('Discount', -promoDiscount),
                 const Divider(),
                 _buildFeeRow('Order Total', orderTotal, isTotal: true),
               ],
             ),
           ),
-
           const SizedBox(height: 24),
-
           // Payment Method
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,17 +276,18 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
           Row(
             children: [
               Image.network(
-                'https://www.paypalobjects.com/webstatic/icon/pp258.png',
+                'https://via.placeholder.com/32x32.png?text=PayPal',
                 width: 32,
                 height: 32,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(Icons.payment, size: 32, color: Colors.grey);
+                },
               ),
               const SizedBox(width: 8),
               const Text('Paypal'),
             ],
           ),
-
           const SizedBox(height: 24),
-
           // Shipping Address
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -258,12 +318,10 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
               Icon(Icons.location_on, size: 16, color: Colors.grey),
               SizedBox(width: 4),
               Expanded(
-                  child: Text(
-                      'South Liana, Maine 87695, USA',
+                  child: Text('South Liana, Maine 87695, USA',
                       style: TextStyle(color: Colors.grey))),
             ],
           ),
-
           const SizedBox(height: 32),
         ],
       ),
@@ -279,22 +337,21 @@ class _OrderReviewScreenState extends State<OrderReviewScreen> {
     );
   }
 
-  Widget _buildFeeRow(String label, double value,
-      {bool isTotal = false}) {
+  Widget _buildFeeRow(String label, double value, {bool isTotal = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label,
-              style: TextStyle(
-                  fontWeight:
-                  isTotal ? FontWeight.bold : FontWeight.normal)),
+          Text(
+            label,
+            style: TextStyle(
+                fontWeight: isTotal ? FontWeight.bold : FontWeight.normal),
+          ),
           Text(
             '\$${value.toStringAsFixed(1)}',
             style: TextStyle(
-                fontWeight:
-                isTotal ? FontWeight.bold : FontWeight.normal),
+                fontWeight: isTotal ? FontWeight.bold : FontWeight.normal),
           ),
         ],
       ),
