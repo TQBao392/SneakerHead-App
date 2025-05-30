@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:t_store/features/authentication/screens/cart/checkout_screen.dart';
 import 'package:t_store/features/authentication/screens/settings/settings.dart';
+import 'package:t_store/screens/all_products/all_products.dart';
 import 'features/authentication/screens/profile/profile_screen.dart';
 import 'features/authentication/screens/cart/cart_screen.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  CheckoutScreen(),
+      home:  const AllProducts(),
     );
   }
 }

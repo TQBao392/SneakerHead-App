@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CartItem {
@@ -24,16 +25,29 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final List<CartItem> _items = List.generate(
-    5,
-        (_) => CartItem(
+  final List<CartItem> _items = [
+    CartItem(
       brand: 'Nike',
-      title: 'Black Sports Shoes',
-      details: 'Color Green   Size UK 08',
-      price: 256.0,
+      title: 'Air Max 270',
+      details: 'Color Black   Size UK 08',
+      price: 150.0,
       quantity: 2,
     ),
-  );
+    CartItem(
+      brand: 'Adidas',
+      title: 'Ultraboost 22',
+      details: 'Color White   Size UK 09',
+      price: 180.0,
+      quantity: 1,
+    ),
+    CartItem(
+      brand: 'Puma',
+      title: 'RS-X Reinvention',
+      details: 'Color Grey   Size UK 07',
+      price: 120.0,
+      quantity: 1,
+    ),
+  ];
 
   double get _totalPrice =>
       _items.fold(0, (sum, item) => sum + item.price * item.quantity);
@@ -52,23 +66,39 @@ class _CartScreenState extends State<CartScreen> {
     });
   }
 
+  void _removeItem(int index) {
+    setState(() {
+      _items.removeAt(index);
+    });
+  }
+
   void _addItem() {
     setState(() {
       _items.add(
         CartItem(
-          brand: 'Adidas',
-          title: 'White Sneakers',
-          details: 'Color White   Size UK 09',
-          price: 199.0,
+          brand: 'New Balance',
+          title: 'Fresh Foam 1080',
+          details: 'Color Blue   Size UK 08',
+          price: 160.0,
           quantity: 1,
         ),
       );
     });
   }
 
+  void _navigateToCheckout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CheckoutScreen(items: _items),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF6F6F6),
       appBar: AppBar(
         title: const Text('Cart'),
         leading: IconButton(
@@ -77,8 +107,8 @@ class _CartScreenState extends State<CartScreen> {
             Navigator.of(context).maybePop();
           },
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        backgroundColor: Colors.white,
+        elevation: 1,
       ),
       body: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 8),
@@ -90,33 +120,40 @@ class _CartScreenState extends State<CartScreen> {
             padding: const EdgeInsets.all(12),
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: const Color(0xFF1E1E1E),
+              color: Colors.white,
               borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade300,
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
             ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Image
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    'https://placehold.co/60x60/png?text=Shoes',
+                    'https://picsum.photos/60/60?random=$index',
                     width: 60,
                     height: 60,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
+                      if (kDebugMode) {
+                        print('Image load error for ${item.title}: $error');
+                      }
                       return Container(
                         width: 60,
                         height: 60,
                         color: Colors.grey,
-                        child: const Icon(Icons.error, color: Colors.red),
+                        child: const Icon(Icons.broken_image, color: Colors.red),
                       );
                     },
                   ),
                 ),
                 const SizedBox(width: 12),
-
-                // Expanded middle section
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,6 +165,7 @@ class _CartScreenState extends State<CartScreen> {
                             style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
+                              color: Colors.black87,
                             ),
                           ),
                           const SizedBox(width: 4),
@@ -139,6 +177,12 @@ class _CartScreenState extends State<CartScreen> {
                               shape: BoxShape.circle,
                             ),
                           ),
+                          const Spacer(),
+                          IconButton(
+                            onPressed: () => _removeItem(index),
+                            icon: const Icon(Icons.delete, color: Colors.red),
+                            tooltip: 'Remove',
+                          ),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -146,6 +190,7 @@ class _CartScreenState extends State<CartScreen> {
                         item.title,
                         style: const TextStyle(
                           fontSize: 14,
+                          color: Colors.black87,
                           overflow: TextOverflow.ellipsis,
                         ),
                         maxLines: 1,
@@ -161,7 +206,6 @@ class _CartScreenState extends State<CartScreen> {
                         maxLines: 1,
                       ),
                       const SizedBox(height: 8),
-                      // Quantity controls
                       Row(
                         children: [
                           InkWell(
@@ -191,15 +235,13 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                 ),
-
                 const SizedBox(width: 8),
-
-                // Price
                 Text(
                   '\$${(item.price * item.quantity).toStringAsFixed(0)}',
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
                 ),
               ],
@@ -209,11 +251,9 @@ class _CartScreenState extends State<CartScreen> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(16),
-        color: Colors.transparent,
+        color: Colors.white,
         child: ElevatedButton(
-          onPressed: () {
-            // Checkout logic
-          },
+          onPressed: _navigateToCheckout,
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFF0A84FF),
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -223,7 +263,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
           child: Text(
             'Checkout \$${_totalPrice.toStringAsFixed(1)}',
-            style: const TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16, color: Colors.white),
           ),
         ),
       ),
@@ -231,6 +271,22 @@ class _CartScreenState extends State<CartScreen> {
         onPressed: _addItem,
         backgroundColor: const Color(0xFF0A84FF),
         child: const Icon(Icons.add_shopping_cart),
+      ),
+    );
+  }
+}
+
+class CheckoutScreen extends StatelessWidget {
+  final List<CartItem> items;
+
+  const CheckoutScreen({super.key, required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Checkout')),
+      body: Center(
+        child: Text('Checkout with ${items.length} items'),
       ),
     );
   }
