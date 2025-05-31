@@ -7,7 +7,7 @@ class Profile {
   final String gender;
   final String dob;
   final String avatarUrl;
-  final String? address; // Added address field
+  final String? address;
 
   Profile({
     required this.name,
@@ -31,7 +31,7 @@ class Profile {
       gender: json['gender'] as String,
       dob: json['dob'] as String,
       avatarUrl: json['avatarUrl'] as String,
-      address: json['address'] as String?, // Handle nullable address
+      address: json['address'] as String?,
     );
   }
 

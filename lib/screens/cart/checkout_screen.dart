@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/data/models/profile_model.dart';
+import 'package:t_store/features/services/profile_service.dart';
 import 'package:t_store/screens/cart/cart_screen.dart';
-import '../all_products/all_products.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final List<CartItem> cartItems;
@@ -10,24 +11,53 @@ class CheckoutScreen extends StatefulWidget {
   @override
   _CheckoutScreenState createState() => _CheckoutScreenState();
 }
- class _CheckoutScreenState extends State<CheckoutScreen> {
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
   String _selectedPaymentMethod = 'Credit Card';
   String? _promoCode;
   bool _isLoading = false;
+  bool _isFetchingProfile = true;
+  String? _profileError;
+  Profile? _profile;
   final double deliveryFee = 10;
-  final String userAddress = '123 Main St, City, Country 12345';
   final List<String> paymentMethods = [
     'Credit Card',
     'PayPal',
     'Apple Pay',
-    'Cash on Delivery'
+    'Cash on Delivery',
   ];
   final TextEditingController _promoController = TextEditingController();
+  final ProfileService _profileService = ProfileService();
 
   double get subtotal =>
       widget.cartItems.fold(0, (sum, item) => sum + item.price * item.quantity);
 
   double get discount => _promoCode == 'SAVE10' ? subtotal * 0.1 : 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserProfile();
+  }
+
+  Future<void> _fetchUserProfile() async {
+    setState(() {
+      _isFetchingProfile = true;
+      _profileError = null;
+    });
+    try {
+      final profile = await _profileService.getUserProfile();
+      setState(() {
+        _profile = profile;
+        _isFetchingProfile = false;
+      });
+    } catch (e) {
+      setState(() {
+        _profileError = 'Failed to load profile: $e';
+        _isFetchingProfile = false;
+      });
+    }
+  }
 
   void _applyPromoCode() {
     setState(() {
@@ -51,7 +81,6 @@ class CheckoutScreen extends StatefulWidget {
 
     setState(() => _isLoading = true);
 
-    // Simulate network request
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
@@ -66,7 +95,7 @@ class CheckoutScreen extends StatefulWidget {
               Text('Total: \$${((subtotal + deliveryFee) - discount).toStringAsFixed(2)}'),
               Text('Items: ${widget.cartItems.length}'),
               Text('Payment: $_selectedPaymentMethod'),
-              Text('Address: $userAddress'),
+              Text('Address: ${_profile?.address ?? 'No address'}'),
               if (_promoCode != null) Text('Promo: $_promoCode'),
             ],
           ),
@@ -78,12 +107,15 @@ class CheckoutScreen extends StatefulWidget {
             TextButton(
               onPressed: () {
                 Navigator.pop(context);
+                setState(() {
+                  widget.cartItems.clear(); // Clear cart after confirmation
+                });
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Order #${DateTime.now().millisecondsSinceEpoch % 10000} placed successfully!'),
                   ),
                 );
-                Navigator.pop(context);
+                Navigator.pop(context); // Return to CartScreen
               },
               child: const Text('Confirm'),
             ),
@@ -92,6 +124,104 @@ class CheckoutScreen extends StatefulWidget {
       );
       setState(() => _isLoading = false);
     }
+  }
+
+  void _showEditProfileDialog() {
+    if (_profile == null) return;
+
+    final TextEditingController nameController = TextEditingController(text: _profile!.name);
+    final TextEditingController emailController = TextEditingController(text: _profile!.email);
+    final TextEditingController phoneController = TextEditingController(text: _profile!.phoneNumber);
+    final TextEditingController genderController = TextEditingController(text: _profile!.gender);
+    final TextEditingController dobController = TextEditingController(text: _profile!.dob);
+    final TextEditingController avatarUrlController = TextEditingController(text: _profile!.avatarUrl);
+    final TextEditingController addressController = TextEditingController(text: _profile!.address);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Edit Profile'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: 'Name'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: phoneController,
+                decoration: const InputDecoration(labelText: 'Phone Number'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: genderController,
+                decoration: const InputDecoration(labelText: 'Gender'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: dobController,
+                decoration: const InputDecoration(labelText: 'Date of Birth (YYYY-MM-DD)'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: avatarUrlController,
+                decoration: const InputDecoration(labelText: 'Avatar URL'),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: addressController,
+                decoration: const InputDecoration(labelText: 'Address'),
+                maxLines: 3,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final updatedProfile = Profile(
+                name: nameController.text.trim(),
+                username: _profile!.username,
+                userId: _profile!.userId,
+                email: emailController.text.trim(),
+                phoneNumber: phoneController.text.trim(),
+                gender: genderController.text.trim(),
+                dob: dobController.text.trim(),
+                avatarUrl: avatarUrlController.text.trim(),
+                address: addressController.text.trim(),
+              );
+              try {
+                await _profileService.updateUserProfile(updatedProfile);
+                setState(() {
+                  _profile = updatedProfile;
+                });
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Profile updated successfully')),
+                );
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Failed to update profile: $e')),
+                );
+              }
+            },
+            child: const Text('Save'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -128,8 +258,8 @@ class CheckoutScreen extends StatefulWidget {
           children: [
             _buildSectionTitle('Order Summary'),
             _buildCartItemsList(),
-            _buildSectionTitle('Delivery Address'),
-            _buildAddressSection(),
+            _buildSectionTitle('Delivery Information'),
+            _buildProfileSection(),
             _buildSectionTitle('Promo Code'),
             _buildPromoCodeSection(),
             _buildSectionTitle('Payment Method'),
@@ -211,29 +341,45 @@ class CheckoutScreen extends StatefulWidget {
     );
   }
 
-  Widget _buildAddressSection() {
+  Widget _buildProfileSection() {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       elevation: 2,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: _isFetchingProfile
+            ? const Center(child: CircularProgressIndicator())
+            : _profileError != null
+            ? Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Text(
-                userAddress,
-                style: const TextStyle(fontSize: 16, color: Colors.black87),
+            Text(
+              _profileError!,
+              style: const TextStyle(color: Colors.red),
+            ),
+            const SizedBox(height: 8),
+            TextButton(
+              onPressed: _fetchUserProfile,
+              child: const Text(
+                'Retry',
+                style: TextStyle(fontSize: 16, color: Colors.blue),
               ),
             ),
+          ],
+        )
+            : Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name: ${_profile?.name ?? 'N/A'}'),
+            const SizedBox(height: 4),
+            Text('Phone: ${_profile?.phoneNumber ?? 'N/A'}'),
+            const SizedBox(height: 4),
+            Text('Address: ${_profile?.address ?? 'N/A'}'),
+            const SizedBox(height: 8),
             TextButton(
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Address change not implemented')),
-                );
-              },
+              onPressed: _showEditProfileDialog,
               child: const Text(
-                'Change',
+                'Edit Info',
                 style: TextStyle(fontSize: 16, color: Colors.blue),
               ),
             ),
