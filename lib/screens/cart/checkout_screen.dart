@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (_) => const CheckoutScreen(),
+        '/': (_) => CheckoutScreen(),
         '/success': (_) => const PaymentSuccessScreen(),
       },
     );
@@ -55,7 +55,7 @@ class CartItem {
 }
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({super.key});
+  //const CheckoutScreen({super.key});
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
 }
