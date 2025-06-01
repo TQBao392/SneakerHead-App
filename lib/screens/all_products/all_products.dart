@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:t_store/screens/cart/cart_screen.dart';
+import 'package:t_store/screens/product_detail_screen.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
 class AllProducts extends StatefulWidget {
@@ -20,11 +21,10 @@ class _AllProductsState extends State<AllProducts> {
   DocumentSnapshot? _lastDocument;
   bool _isLoadingMore = false;
   bool _hasMore = true;
-  List<Map<String, dynamic>> _products = [];
+  final List<Map<String, dynamic>> _products = [];
 
   void _addToCart(Map<String, dynamic> product) {
     final title = product['name'] ?? 'Unknown';
-    final price = (product['price'] as num?)?.toDouble() ?? 0.0;
     final existingIndex = _cartItems.indexWhere((item) => item.title == title);
 
     setState(() {
@@ -35,7 +35,7 @@ class _AllProductsState extends State<AllProducts> {
           brand: product['brand'] ?? 'No Brand',
           title: title,
           imageUrl: product['imageUrl'] ?? '',
-          price: price,
+          price: (product['price'] as num?)?.toDouble() ?? 0.0,
           quantity: 1,
         ));
       }
@@ -130,6 +130,7 @@ class _AllProductsState extends State<AllProducts> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Products'),
+        leading: null, // Remove the back button
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
@@ -238,16 +239,28 @@ class _AllProductsState extends State<AllProducts> {
                     itemBuilder: (context, index) {
                       if (index ==
                           _filterAndSortProducts(_products).length) {
-                        return const Center(
-                            child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       final product = _filterAndSortProducts(_products)[index];
-                      return TProductCardVertical(
-                        imageUrl: product['imageUrl'] ?? '',
-                        title: product['name'] ?? 'No name',
-                        brand: product['brand'] ?? 'No brand',
-                        price: (product['price'] as num?)?.toDouble() ?? 0.0,
-                        onAddToCart: () => _addToCart(product),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductDetailScreen(
+                                product: product,
+                                cartItems: _cartItems,
+                              ),
+                            ),
+                          );
+                        },
+                        child: TProductCardVertical(
+                          imageUrl: product['imageUrl'] ?? '',
+                          title: product['name'] ?? 'No name',
+                          brand: product['brand'] ?? 'No brand',
+                          price: (product['price'] as num?)?.toDouble() ?? 0.0,
+                          onAddToCart: () => _addToCart(product),
+                        ),
                       );
                     },
                   ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/shadow_style.dart';
@@ -37,9 +38,8 @@ class TProductCardVertical extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Image + Sale tag + Wishlist icon
           Expanded(
-            flex: 3, // Allocate proportional space for image
+            flex: 3,
             child: Container(
               padding: const EdgeInsets.all(TSizes.sm),
               decoration: BoxDecoration(
@@ -48,28 +48,20 @@ class TProductCardVertical extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  /// Product Image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(TSizes.productImageRadius),
-                    child: Image.network(
-                      imageUrl,
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
                       fit: BoxFit.contain,
                       width: double.infinity,
                       height: double.infinity,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
-                        );
-                      },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return const Center(child: CircularProgressIndicator());
-                      },
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                      ),
                     ),
                   ),
-
-                  /// Sale Tag
                   Positioned(
                     top: 12,
                     child: Container(
@@ -84,8 +76,6 @@ class TProductCardVertical extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  /// Wishlist Icon
                   const Positioned(
                     top: 0,
                     right: 0,
@@ -95,10 +85,7 @@ class TProductCardVertical extends StatelessWidget {
               ),
             ),
           ),
-
           const SizedBox(height: TSizes.spaceBtwItems / 2),
-
-          /// Title & Brand
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
             child: Column(
@@ -120,10 +107,7 @@ class TProductCardVertical extends StatelessWidget {
               ],
             ),
           ),
-
           const SizedBox(height: TSizes.spaceBtwItems / 2),
-
-          /// Price + Add to cart
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
             child: Row(

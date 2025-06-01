@@ -113,7 +113,7 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
               trailing: Text(
-                '\$${(item.price * item.quantity).toStringAsFixed(2)}',
+                '${(item.price * item.quantity).toStringAsFixed(2)}₫',
               ),
             );
           },
@@ -129,7 +129,7 @@ class _CartScreenState extends State<CartScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Total: \$${totalPrice.toStringAsFixed(2)}',
+              'Total: ${totalPrice.toStringAsFixed(2)}₫',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

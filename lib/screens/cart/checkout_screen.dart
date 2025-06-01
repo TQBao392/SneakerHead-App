@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:t_store/data/models/profile_model.dart';
 import 'package:t_store/features/services/profile_service.dart';
+import 'package:t_store/screens/all_products/all_products.dart'; // Import AllProducts
 import 'package:t_store/screens/cart/cart_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -106,16 +108,21 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pop(context); // Close dialog
                 setState(() {
-                  widget.cartItems.clear(); // Clear cart after confirmation
+                  widget.cartItems.clear(); // Clear cart items
                 });
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Order #${DateTime.now().millisecondsSinceEpoch % 10000} placed successfully!'),
                   ),
                 );
-                Navigator.pop(context); // Return to CartScreen
+                // Navigate to AllProducts and remove all previous routes
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AllProducts()),
+                      (Route<dynamic> route) => false, // Removes all previous routes
+                );
               },
               child: const Text('Confirm'),
             ),
@@ -322,13 +329,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
                 Text(
-                  'Qty: ${item.quantity} × \$${item.price.toStringAsFixed(2)}',
+                  'Qty: ${item.quantity} × ${item.price.toStringAsFixed(2)}₫',
                   style: const TextStyle(fontSize: 14),
                 ),
               ],
             ),
             trailing: Text(
-              '\$${(item.price * item.quantity).toStringAsFixed(2)}',
+              '${(item.price * item.quantity).toStringAsFixed(2)}₫',
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -487,8 +494,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
           Text(
             amount < 0
-                ? '-\$${(-amount).toStringAsFixed(2)}'
-                : '\$${amount.toStringAsFixed(2)}',
+                ? '-${(-amount).toStringAsFixed(2)}₫'
+                : '${amount.toStringAsFixed(2)}₫',
             style: TextStyle(
               fontSize: isTotal ? 20 : 16,
               fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
@@ -501,8 +508,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   }
 
   Widget _buildPlaceOrderButton(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
+    return Container(
+      width: double.infinity, // Full-width
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),

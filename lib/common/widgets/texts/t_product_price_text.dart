@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TProductPriceText extends StatelessWidget {
   const TProductPriceText({
     super.key,
-    this.currencySign = '\$',
+    this.currencySign = '₫',
     required this.price,
     this.isLarge = false,
     this.maxLines = 1,
@@ -17,13 +17,17 @@ class TProductPriceText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text (
-        currencySign + price,
-        maxLines: maxLines,
-        overflow: TextOverflow.ellipsis,
-        style: isLarge
-        ? Theme.of(context).textTheme.headlineMedium!.apply(decoration: lineThrough ? TextDecoration.lineThrough : null)
-        : Theme.of(context).textTheme.titleLarge!.apply(decoration: lineThrough ? TextDecoration.lineThrough : null),
+    // Ensure price is treated as a number and formatted without decimals
+    final formattedPrice = double.tryParse(price)?.toStringAsFixed(0) ?? price;
+    return Text(
+      '$formattedPrice$currencySign',
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
+      style: isLarge
+          ? Theme.of(context).textTheme.headlineMedium!.apply(
+          decoration: lineThrough ? TextDecoration.lineThrough : null)
+          : Theme.of(context).textTheme.titleLarge!.apply(
+          decoration: lineThrough ? TextDecoration.lineThrough : null),
     );
   }
 }
