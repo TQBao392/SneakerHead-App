@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "54456157133",
+    "project_id": "sneakerhead-4a4ba",
+    "storage_bucket": "sneakerhead-4a4ba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54456157133:android:2053557ac977c346f77a84",
+        "android_client_info": {
+          "package_name": "com.example.sneakerhead"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54456157133-oftnsoim7g1703584ofj1mn20u5tfm42.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sneakerhead",
+            "certificate_hash": "9c30c0d84122d5604de8b5b4ff693db55432172e"
+          }
+        },
+        {
+          "client_id": "54456157133-sofik40v2mqt5cfjlommhbuqfv85u63s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPkCzypN9I6L8AllyKSERlxRk5HExq7d8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54456157133-sofik40v2mqt5cfjlommhbuqfv85u63s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "54456157133-m3jepmbukegefebl2f52jfgb5927qleo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sneakerhead"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

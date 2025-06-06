@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sneakerhead/features/authentication/controllers.onboarding/onboarding_controller.dart';
+import 'package:sneakerhead/features/authentication/controllers/onboarding/onboarding_controller.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
