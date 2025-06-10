@@ -1,19 +1,13 @@
 name: sneakerhead
 description: "A new Flutter project."
-
-publish_to: 'none' 
-
-
+publish_to: 'none'
 version: 1.0.0+1
-
 environment:
   sdk: ^3.7.2
-
 
 dependencies:
   flutter:
     sdk: flutter
-
 
   # Utility Packages
   http: ^1.1.0
@@ -24,47 +18,38 @@ dependencies:
   image_picker: ^1.1.2
   url_launcher: ^6.1.12
   connectivity_plus: ^6.1.4
-  flutter_native_splash: ^2.4.6
   smooth_page_indicator: ^1.2.1
   # Icons
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.8
 
-  #State Management
+  # State Management
   get: ^4.6.5
   get_storage: ^2.1.1
 
   cached_network_image: ^3.4.1
-  
 
   # Product Specific
   readmore: ^3.0.0
   carousel_slider: ^5.0.0
   flutter_rating_bar: ^4.0.1
 
-  #Firebase
+  # Firebase
   firebase_core: ^3.13.1
   firebase_auth: ^5.5.4
   cloud_firestore: ^5.6.8
   google_sign_in: ^6.3.0
   firebase_storage: ^12.4.6
-  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  
+  flutter_launcher_icons: "^0.14.3"
+  flutter_native_splash: ^2.4.6
   flutter_lints: ^5.0.0
 
-
-
-
 flutter:
-
-  
   uses-material-design: true
-
   assets:
     - assets/logos/
     - assets/icons/brands/
@@ -76,7 +61,6 @@ flutter:
     - assets/images/animations/
     - assets/icons/payment_methods/
     - assets/images/on_boarding_images/
-
   fonts:
     - family: Poppins
       fonts:
@@ -95,4 +79,34 @@ flutter:
           weight: 600
         - asset: assets/fonts/Poppins-Bold.ttf
           weight: 800
-   
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logos/t-store-splash-logo-black.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "assets/logos/t-store-splash-logo-black.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "assets/logos/t-store-splash-logo-black.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "assets/logos/t-store-splash-logo-black.png"
+
+# Move flutter_native_splash configuration here or to a separate file
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#272727"
+  image: assets/logos/t-store-splash-logo-black.png
+  image_dark: assets/logos/t-store-splash-logo-white.png
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#272727"
+    image: assets/logos/t-store-splash-logo-black.png
+    image_dark: assets/logos/t-store-splash-logo-white.png
+  web: false

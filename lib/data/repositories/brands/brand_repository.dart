@@ -33,37 +33,59 @@ class BrandRepository extends GetxController {
   /// Get Brands for Category
   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
     try {
-      // Query to get all documentss where categoryId matches the provided categoryId
-      QuerySnapshot brandCategoryQuery =
-          await _db
-              .collection('BrandCategory')
-              .where('categoryId', isEqualTo: categoryId)
-              .get();
+      print('[BrandRepository] Fetching brand-category links for categoryId: $categoryId');
 
-      // Extract brandIds from documents
-      List<String> brandIds =
-          brandCategoryQuery.docs
-              .map((doc) => doc['brandId'] as String)
-              .toList();
-      // Query to get all documents where the brandId is in the list of brandIs, FieldPath.documentId to query documents in Collection
-      final brandsQuery =
-          await _db
-              .collection('Brands')
-              .where(FieldPath.documentId, whereIn: brandIds)
-              .limit(2)
-              .get();
-      // Extract brand names or other relevants data from documents
-      List<BrandModel> brands =
-          brandsQuery.docs.map((doc) => BrandModel.fromSnapshot(doc)).toList();
+      final brandCategoryQuery = await _db
+          .collection('BrandCategory')
+          .where('categoryId', isEqualTo: categoryId)
+          .get();
+
+      final rawBrandIds = brandCategoryQuery.docs
+          .map((doc) => doc['brandId'] as String? ?? '')
+          .toList();
+
+      print('[BrandRepository] Raw brand IDs: $rawBrandIds');
+
+      final validBrandIds = rawBrandIds
+          .where((id) => id.trim().isNotEmpty)
+          .toList();
+
+      print('[BrandRepository] Valid brand IDs: $validBrandIds');
+
+      if (validBrandIds.isEmpty) {
+        print('[BrandRepository] No valid brand IDs found for category: $categoryId');
+        return [];
+      }
+
+      final brandsQuery = await _db
+          .collection('Brands')
+          .where(FieldPath.documentId, whereIn: validBrandIds)
+          .limit(2)
+          .get();
+
+      final brands = brandsQuery.docs
+          .map((doc) => BrandModel.fromSnapshot(doc))
+          .toList();
+
+      print('[BrandRepository] Successfully fetched ${brands.length} brand(s) for category: $categoryId');
+
       return brands;
     } on FirebaseException catch (e) {
+      print('[BrandRepository] FirebaseException: ${e.message}');
       throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
+      print('[BrandRepository] FormatException: Malformed data');
       throw const TFormatException();
     } on PlatformException catch (e) {
+      print('[BrandRepository] PlatformException: ${e.code}');
       throw TPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong while fetching Banners.';
+      print('[BrandRepository] Unknown error: $e');
+      throw 'Something went wrong while fetching brands.';
     }
+
+    // ✅ Fallback safeguard — this ensures non-null return
+    return [];
   }
+
 }

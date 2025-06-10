@@ -43,13 +43,22 @@ class BrandController extends GetxController {
   /// -- Get Brands For Category
   Future<List<BrandModel>> getBrandsForCategory(String categoryId) async {
     try {
+      print('[BrandController] Fetching brands for category: $categoryId');
+
       final brands = await brandRepository.getBrandsForCategory(categoryId);
+
+      print('[BrandController] Successfully fetched ${brands.length} brand(s) for category: $categoryId');
       return brands;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('[BrandController] Error fetching brands for category: $categoryId');
+      print('[BrandController] Error: $e');
+      print('[BrandController] StackTrace: $stackTrace');
+
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       return [];
     }
   }
+
 
   /// Get BrandSpecific Products from your data source
   Future<List<ProductModel>> getBrandProducts({
@@ -57,14 +66,23 @@ class BrandController extends GetxController {
     int limit = -1,
   }) async {
     try {
+      print('[BrandController] Fetching products for brand: $brandId (limit: $limit)');
+
       final products = await ProductRepository.instance.getProductsForBrand(
         brandId: brandId,
         limit: limit,
       );
+
+      print('[BrandController] Successfully fetched ${products.length} product(s) for brand: $brandId');
       return products;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('[BrandController] Error fetching products for brand: $brandId');
+      print('[BrandController] Error: $e');
+      print('[BrandController] StackTrace: $stackTrace');
+
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
       return [];
     }
   }
+
 }

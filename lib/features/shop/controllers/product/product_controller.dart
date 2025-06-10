@@ -11,6 +11,13 @@ class ProductController extends GetxController {
   final productRepository = Get.put(ProductRepository());
   RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchAllFeaturedProducts();
+    fetchFeaturedProducts();
+  }
+
   void fetchFeaturedProducts() async {
     try {
       // Show loader while loading Products
@@ -31,7 +38,7 @@ class ProductController extends GetxController {
   Future<List<ProductModel>> fetchAllFeaturedProducts() async {
     try {
       // Fetch Products
-      final products = await productRepository.getFeaturedProducts();
+      final products = await productRepository.getAllFeaturedProducts();
       return products;
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
@@ -50,7 +57,7 @@ class ProductController extends GetxController {
           .toString();
     } else {
       // Calculate the smallest and largest prices among variations
-      for (var variation in product.productVaritations!) {
+      for (var variation in product.productVariations!) {
         // Determine the price to consider (sale price if available, otherwise regular price)
         double priceToConsider =
             variation.salePrice > 0.0 ? variation.salePrice : variation.price;

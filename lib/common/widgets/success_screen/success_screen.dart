@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sneakerhead/common/styles/spacing_styles.dart';
-import 'package:sneakerhead/utils/constants/sizes.dart';
-import 'package:sneakerhead/utils/constants/text_strings.dart';
-import 'package:sneakerhead/utils/helpers/helper_functions.dart';
+import 'package:lottie/lottie.dart';
 
 class SuccessScreen extends StatelessWidget {
+  final String image;
+  final String title;
+  final String subTitle;
+  final VoidCallback onPressed;
+
   const SuccessScreen({
     super.key,
     required this.image,
@@ -13,45 +15,32 @@ class SuccessScreen extends StatelessWidget {
     required this.onPressed,
   });
 
-  final String image, title, subTitle;
-  final VoidCallback onPressed;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Center(
         child: Padding(
-          padding: TSpacingStyle.paddingWithAppBarHeight * 2,
+          padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              /// Image
-              Image(
-                image: AssetImage(image),
-                width: THelperFunctions.screenWidth() * 0.6,
-              ),
-              const SizedBox(height: TSizes.spaceBtwSections),
-
-              /// Title & SubTitle
+              Lottie.asset(image, height: 200),
+              const SizedBox(height: 20),
               Text(
                 title,
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwItems),
+              const SizedBox(height: 10),
               Text(
                 subTitle,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: TSizes.spaceBtwSections),
-
-              /// Buttons
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: onPressed,
-                  child: const Text(TTexts.tContinue),
-                ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: onPressed,
+                child: const Text('Continue'),
               ),
             ],
           ),

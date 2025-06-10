@@ -50,7 +50,6 @@ class TProductCardHorizontal extends StatelessWidget {
                   child: TRoundedImage(
                     imageUrl: product.thumbnail,
                     applyImageRadius: true,
-                    isNetworkImage: true,
                   ),
                 ),
 

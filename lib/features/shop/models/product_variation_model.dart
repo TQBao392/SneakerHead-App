@@ -12,19 +12,17 @@ class ProductVariationModel {
     required this.id,
     this.sku = '',
     this.image = '',
-    this.description = '',
+    this.description,
     this.price = 0.0,
     this.salePrice = 0.0,
     this.stock = 0,
     required this.attributeValues,
   });
 
-  /// Create Empty func for clean code
   static ProductVariationModel empty() =>
       ProductVariationModel(id: '', attributeValues: {});
 
-  /// Json Format
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'Id': id,
       'Image': image,
@@ -37,18 +35,20 @@ class ProductVariationModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
-  factory ProductVariationModel.fromJson(Map<String, dynamic> document) {
-    final data = document;
+  factory ProductVariationModel.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty) return ProductVariationModel.empty();
+
     return ProductVariationModel(
       id: data['Id'] ?? '',
-      price: double.parse((data['Price'] ?? 0.0).toString()),
       sku: data['SKU'] ?? '',
-      stock: data['Stock'] ?? 0,
-      salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
       image: data['Image'] ?? '',
-      attributeValues: Map<String, String>.from(data['AttributeValues']),
+      description: data['Description'],
+      price: double.tryParse((data['Price'] ?? 0).toString()) ?? 0.0,
+      salePrice: double.tryParse((data['SalePrice'] ?? 0).toString()) ?? 0.0,
+      stock: int.tryParse((data['Stock'] ?? 0).toString()) ?? 0,
+      attributeValues: data['AttributeValues'] != null
+          ? Map<String, String>.from(data['AttributeValues'])
+          : {},
     );
   }
 }

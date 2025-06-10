@@ -26,7 +26,7 @@ class VariationController extends GetxController {
     selectedAttributes[attributeName] = attributeValue;
     this.selectedAttributes[attributeName] = attributeValue;
 
-    final selectedVariation = product.productVaritations!.firstWhere(
+    final selectedVariation = product.productVariations!.firstWhere(
       (variation) =>
           _isSameAttributeValues(variation.attributeValues, selectedAttributes),
       orElse: () => ProductVariationModel.empty(),
@@ -46,10 +46,18 @@ class VariationController extends GetxController {
     }
 
     // Assign Selected Variation
-    this.selectedVariation.value = selectedVariation;
+    if (selectedVariation.id.isNotEmpty) {
+      // Assign Selected Variation
+      this.selectedVariation.value = selectedVariation;
 
-    // Update selected product variation status
-    getProductVariationStockStatus();
+      // Update stock status
+      getProductVariationStockStatus();
+    } else {
+      // No valid variation found for selected attributes
+      this.selectedVariation.value = ProductVariationModel.empty();
+      variationStockStatus.value = 'Unavailable';
+    }
+
   }
 
   /// -- Check If selected attributes matches any variation attributes

@@ -19,6 +19,7 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final controller = FavouritesController.instance;
     return Scaffold(
       appBar: TAppBar(
@@ -45,7 +46,7 @@ class FavouriteScreen extends StatelessWidget {
                 // Nothing Found Widget
                 final emptyWidget = TAnimationLoaderWidget(
                   text: 'Whoops! Wishlist is Empty...',
-                  animation: TImages.pencilAnimation,
+                  animation: TImages.searchAnimation,
                   showAction: true,
                   actionText: 'Let\'s add some',
                   onActionPressed: () => Get.off(() => const NavigationMenu()),

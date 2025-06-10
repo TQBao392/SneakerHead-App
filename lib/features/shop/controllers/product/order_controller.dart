@@ -38,7 +38,7 @@ class OrderController extends GetxController {
       // Start Loader
       TFullScreenLoader.openLoadingDialog(
         'Processing your order',
-        TImages.pencilAnimation,
+        TImages.cartAnimation,
       );
 
       // Get user authentication Id

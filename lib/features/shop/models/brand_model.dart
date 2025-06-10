@@ -15,11 +15,9 @@ class BrandModel {
     this.productsCount,
   });
 
-  // Empty Helper Function
   static BrandModel empty() => BrandModel(id: '', image: '', name: '');
 
-  /// Convert model to Json structure so that you can store data in Firebase
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'Id': id,
       'Name': name,
@@ -29,36 +27,27 @@ class BrandModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
-  factory BrandModel.fromJson(Map<String, dynamic> document) {
-    final data = document;
+  factory BrandModel.fromJson(Map<String, dynamic> data) {
     if (data.isEmpty) return BrandModel.empty();
+
     return BrandModel(
       id: data['Id'] ?? '',
       name: data['Name'] ?? '',
       image: data['Image'] ?? '',
       isFeatured: data['IsFeatured'] ?? false,
-      productsCount: int.parse((data['ProductsCount'] ?? 0).toString()),
+      productsCount: int.tryParse((data['ProductsCount'] ?? 0).toString()),
     );
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
-  factory BrandModel.fromSnapshot(
-    DocumentSnapshot<Map<String, dynamic>> document,
-  ) {
-    if (document.data() != null) {
-      final data = document.data()!;
-
-      // Map JSON Record to the Model
-      return BrandModel(
-        id: document.id,
-        name: data['Name'] ?? '',
-        image: data['Image'] ?? '',
-        productsCount: data['ProductsCount'] ?? '',
-        isFeatured: data['IsFeatured'] ?? false,
-      );
-    } else {
-      return BrandModel.empty();
-    }
+  factory BrandModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+    if (document.data() == null) return BrandModel.empty();
+    final data = document.data()!;
+    return BrandModel(
+      id: document.id,
+      name: data['Name'] ?? '',
+      image: data['Image'] ?? '',
+      isFeatured: data['IsFeatured'] ?? false,
+      productsCount: int.tryParse((data['ProductsCount'] ?? 0).toString()),
+    );
   }
 }

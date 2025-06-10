@@ -66,11 +66,14 @@ class CategoryController extends GetxController {
     required String categoryId,
     int limit = 4,
   }) async {
-    // Fetch limited (4) products against each subCategory
-    final products = await ProductRepository.instance.getProductsForCategory(
-      categoryId: categoryId,
-      limit: limit,
-    );
-    return products;
+    try {
+      final products = await ProductRepository.instance.getProductsForCategory(
+        categoryId: categoryId,
+        limit: limit,
+      );
+      return products;
+    } catch (e, st) {
+      return []; // or rethrow if you want FutureBuilder to catch
+    }
   }
 }

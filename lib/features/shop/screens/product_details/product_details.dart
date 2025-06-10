@@ -47,17 +47,6 @@ class ProductDetailScreen extends StatelessWidget {
                     TProductAttributes(product: product),
                   if (product.productType == ProductType.variable.toString())
                     const SizedBox(height: TSizes.spaceBtwSections),
-
-                  /// -- Checkout Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Checkout'),
-                    ),
-                  ),
-                  const SizedBox(height: TSizes.spaceBtwSections),
-
                   /// -- Description
                   const TSectionHeading(
                     title: 'Description',

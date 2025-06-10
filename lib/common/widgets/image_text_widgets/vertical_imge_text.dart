@@ -43,7 +43,7 @@ class TVerticalImageText extends StatelessWidget {
               ),
               child: Center(
                 child: Image(
-                  image: AssetImage(image),
+                  image: NetworkImage(image),
                   fit: BoxFit.cover,
                   color:
                       THelperFunctions.isDarkMode(context)

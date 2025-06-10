@@ -121,7 +121,7 @@ class TProductAttributes extends StatelessWidget {
                                         attributeValue;
                                     final available = controller
                                         .getAttributesAvailabilityInVariation(
-                                          product.productVaritations!,
+                                          product.productVariations!,
                                           attribute.name!,
                                         )
                                         .contains(attributeValue);

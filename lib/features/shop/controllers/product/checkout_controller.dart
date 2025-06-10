@@ -15,8 +15,8 @@ class CheckoutController extends GetxController {
   @override
   void onInit() {
     selectedPaymentMethodModel.value = PaymentMethodModel(
-      image: 'Paypal',
-      name: TImages.paypal,
+      image: TImages.paypal,
+      name: 'Paypal',
     );
     super.onInit();
   }
@@ -24,79 +24,77 @@ class CheckoutController extends GetxController {
   Future<dynamic> showPaymentMethod(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      builder:
-          (_) => SingleChildScrollView(
-            child: Container(
-              padding: const EdgeInsets.all(TSizes.lg),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TSectionHeading(
-                    title: 'Select Payment Method',
-                    showActionButton: false,
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.paypal,
-                      name: 'Paypal',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.googlePay,
-                      name: 'Google Pay',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.applePay,
-                      name: 'Apple Pay',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.visa,
-                      name: 'VISA',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.masterCard,
-                      name: 'Master Card',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.paytm,
-                      name: 'Paytm',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.paystack,
-                      name: 'Paystack',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  TPaymentTile(
-                    paymentMethod: PaymentMethodModel(
-                      image: TImages.creditCard,
-                      name: 'Credit Card',
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections / 2),
-                  SizedBox(height: TSizes.spaceBtwSections),
-                ],
+      builder: (_) => SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(TSizes.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TSectionHeading(
+                title: 'Select Payment Method',
+                showActionButton: false,
               ),
-            ),
+              SizedBox(height: TSizes.spaceBtwSections),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.paypal,
+                  name: 'Paypal',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.googlePay,
+                  name: 'Google Pay',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.applePay,
+                  name: 'Apple Pay',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.visa,
+                  name: 'VISA',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.masterCard,
+                  name: 'Master Card',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.paytm,
+                  name: 'Paytm',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.paystack,
+                  name: 'Paystack',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections / 2),
+              TPaymentTile(
+                paymentMethod: PaymentMethodModel(
+                  image: TImages.creditCard,
+                  name: 'Credit Card',
+                ),
+              ),
+              SizedBox(height: TSizes.spaceBtwSections),
+            ],
           ),
+        ),
+      ),
     );
   }
 }

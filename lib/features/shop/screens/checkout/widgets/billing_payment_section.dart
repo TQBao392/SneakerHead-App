@@ -23,7 +23,7 @@ class TBillingPaymentSection extends StatelessWidget {
         ),
         const SizedBox(height: TSizes.spaceBtwItems / 2),
         Obx(
-          () => Row(
+              () => Row(
             children: [
               TRoundedContainer(
                 width: 60,
@@ -38,9 +38,12 @@ class TBillingPaymentSection extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: TSizes.spaceBtwItems / 2),
-              Text(
-                controller.selectedPaymentMethodModel.value.name,
-                style: Theme.of(context).textTheme.bodyLarge,
+              Flexible(
+                child: Text(
+                  controller.selectedPaymentMethodModel.value.name,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis, // Truncates text with "..." if it overflows
+                ),
               ),
             ],
           ),

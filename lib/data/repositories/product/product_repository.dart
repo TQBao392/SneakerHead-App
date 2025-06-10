@@ -17,40 +17,66 @@ class ProductRepository extends GetxController {
 
   /// Get limited featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
+
     try {
-      final snapshot =
-          await _db
-              .collection('Products')
-              .where('IsFeatured', isEqualTo: true)
-              .limit(4)
-              .get();
-      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+      final snapshot = await _db
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .limit(4)
+          .get();
+
+
+      final products = snapshot.docs.map((e) {
+        final product = ProductModel.fromSnapshot(e);
+        return product;
+      }).toList();
+
+      return products;
     } on FirebaseException catch (e) {
+      print('🔥 FirebaseException: ${e.message}');
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
+      print('🔥 PlatformException: ${e.message}');
       throw TPlatformException(e.code).message;
     } catch (e) {
+      print('❌ Unknown error in getFeaturedProducts: $e');
       throw 'Something went wrong. Please try again';
     }
   }
 
+
   /// Get limited featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
-      final snapshot =
-          await _db
-              .collection('Products')
-              .where('IsFeatured', isEqualTo: true)
-              .get();
-      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-    } on FirebaseException catch (e) {
+      final snapshot = await _db.collection('Products').get();
+      final products = snapshot.docs.map((e) {
+        final product = ProductModel.fromSnapshot(e);
+        return product;
+      }).toList();
+
+      return products;
+    } on FirebaseException catch (e, stackTrace) {
+      print('🔥 FirebaseException caught');
+      print('Code: ${e.code}');
+      print('Message: ${e.message}');
+      print('StackTrace: $stackTrace');
       throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e, stackTrace) {
+      print('🔥 PlatformException caught');
+      print('Code: ${e.code}');
+      print('Message: ${e.message}');
+      print('StackTrace: $stackTrace');
       throw TPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Something went wrong. Please try again';
+    } catch (e, stackTrace) {
+      print('❌ Unknown error caught');
+      print('Error: $e');
+      print('Type: ${e.runtimeType}');
+      print('StackTrace: $stackTrace');
+      throw 'Unexpected error of type ${e.runtimeType}: $e';
     }
   }
+
+
 
   /// Get Products based on the query
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
@@ -97,79 +123,100 @@ class ProductRepository extends GetxController {
     int limit = -1,
   }) async {
     try {
-      final querySnapshot =
-          limit == -1
-              ? await _db
-                  .collection('Products')
-                  .where('Brand.Id', isEqualTo: brandId)
-                  .get()
-              : await _db
-                  .collection('Products')
-                  .where('BrandId', isEqualTo: brandId)
-                  .limit(limit)
-                  .get();
+      print('[ProductRepository] Starting query for brandId: $brandId, limit: $limit');
 
-      final products =
-          querySnapshot.docs
-              .map((doc) => ProductModel.fromSnapshot(doc))
-              .toList();
+      final query = _db
+          .collection('Products')
+          .where('Brand.Id', isEqualTo: brandId);
+
+      final querySnapshot = limit == -1
+          ? await query.get()
+          : await query.limit(limit).get();
+
+      print('[ProductRepository] Query complete. Fetched ${querySnapshot.docs.length} documents.');
+
+      final products = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+
+      print('[ProductRepository] Parsed ${products.length} product(s) for brandId: $brandId');
 
       return products;
-    } on FirebaseException catch (e) {
+    } on FirebaseException catch (e, stackTrace) {
+      print('[ProductRepository] FirebaseException: ${e.code}');
+      print('[ProductRepository] StackTrace: $stackTrace');
       throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
+    } on PlatformException catch (e, stackTrace) {
+      print('[ProductRepository] PlatformException: ${e.code}');
+      print('[ProductRepository] StackTrace: $stackTrace');
       throw TPlatformException(e.code).message;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('[ProductRepository] Unknown error: $e');
+      print('[ProductRepository] StackTrace: $stackTrace');
       throw 'Something went wrong. Please try again';
     }
   }
+
 
   Future<List<ProductModel>> getProductsForCategory({
     required String categoryId,
     int limit = 4,
   }) async {
     try {
-      // Query to get all documents where productId matches the provided categoryId & Fetch limited or unlimited based on limit
-      QuerySnapshot productCategoryQuery =
-          limit == -1
-              ? await _db
-                  .collection('ProductCategory')
-                  .where('categoryId', isEqualTo: categoryId)
-                  .get()
-              : await _db
-                  .collection('ProductCategory')
-                  .where('categoryId', isEqualTo: categoryId)
-                  .limit(limit)
-                  .get();
+      final productCategoryQuery = limit == -1
+          ? await _db
+          .collection('ProductCategory')
+          .where('categoryId', isEqualTo: categoryId)
+          .get()
+          : await _db
+          .collection('ProductCategory')
+          .where('categoryId', isEqualTo: categoryId)
+          .limit(limit)
+          .get();
 
-      // Extract productIds from document
-      List<String> productIds =
-          productCategoryQuery.docs
-              .map((doc) => doc['productId'] as String)
-              .toList();
+      final productIds = productCategoryQuery.docs
+          .map((doc) => doc['productId'] as String)
+          .toList();
 
-      // Query to get all document where the brandId is in the list of brandIds, FieldPath.documentId to query documents in Collection
-      final productsQuery =
-          await _db
-              .collection('Products')
-              .where(FieldPath.documentId, whereIn: productIds)
-              .get();
+      if (productIds.isEmpty) {
+        return []; // No products for category
+      }
 
-      // Extract brand names or other relevant data from documents
-      List<ProductModel> products =
-          productsQuery.docs
-              .map((doc) => ProductModel.fromSnapshot(doc))
-              .toList();
+      // If more than 10 IDs, split into chunks
+      final List<ProductModel> allProducts = [];
 
-      return products;
+      final chunks = [
+        for (var i = 0; i < productIds.length; i += 10)
+          productIds.sublist(i, i + 10 > productIds.length ? productIds.length : i + 10)
+      ];
+
+      for (var chunk in chunks) {
+        final productsQuery = await _db
+            .collection('Products')
+            .where(FieldPath.documentId, whereIn: chunk)
+            .get();
+
+        final products = productsQuery.docs
+            .map((doc) => ProductModel.fromSnapshot(doc))
+            .toList();
+
+        allProducts.addAll(products);
+      }
+
+      return allProducts;
     } on FirebaseException catch (e) {
+      print('FirebaseException: ${e.code}, ${e.message}');
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {
+      print('PlatformException: ${e.code}, ${e.message}');
       throw TPlatformException(e.code).message;
-    } catch (e) {
+    } catch (e, st) {
+      print('Unexpected exception: $e');
+      print(st);
       throw 'Something went wrong. Please try again';
     }
   }
+
 
   /// Upload dummy data to the cloud Firebase
   Future<void> uploadDummyData(List<ProductModel> products) async {
@@ -217,7 +264,7 @@ class ProductRepository extends GetxController {
 
         // Upload Variation Images
         if (product.productType == ProductType.variable.toString()) {
-          for (var variation in product.productVaritations!) {
+          for (var variation in product.productVariations!) {
             // Get image data link from local assets
             final assetImage = await storage.getImageDataFromAssets(
               variation.image,

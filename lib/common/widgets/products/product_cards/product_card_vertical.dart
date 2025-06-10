@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sneakerhead/common/styles/shadows.dart';
@@ -26,7 +28,6 @@ class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key, required this.product});
 
   final ProductModel product;
-
   @override
   Widget build(BuildContext context) {
     final controller = ProductController.instance;
@@ -35,7 +36,6 @@ class TProductCardVertical extends StatelessWidget {
       product.salePrice,
     );
     final dark = THelperFunctions.isDarkMode(context);
-
     /// Container with side paddings, color, edges, radius and shadow.
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetailScreen(product: product)),
@@ -59,10 +59,15 @@ class TProductCardVertical extends StatelessWidget {
                 children: [
                   /// - Thumbnail Image
                   Center(
-                    child: TRoundedImage(
-                      imageUrl: product.thumbnail,
+                    child:
+                    TRoundedImage(
+                      imageUrl: product.thumbnail.isNotEmpty
+                          ? product.thumbnail
+                          : 'https://picsum.photos/250?image=9',
                       applyImageRadius: true,
-                      isNetworkImage: true,
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
                     ),
                   ),
 

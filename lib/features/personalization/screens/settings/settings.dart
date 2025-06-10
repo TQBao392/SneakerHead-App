@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -12,6 +13,7 @@ import 'package:sneakerhead/features/personalization/screens/profile/profile.dar
 import 'package:sneakerhead/features/shop/screens/order/order.dart';
 import 'package:sneakerhead/utils/constants/colors.dart';
 import 'package:sneakerhead/utils/constants/sizes.dart';
+import 'package:sneakerhead/features/authentication/screens/login/login.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -75,11 +77,6 @@ class SettingsScreen extends StatelessWidget {
                     onTap: () => Get.to(() => const OrderScreen()),
                   ),
                   TSettingsMenuTile(
-                    icon: Iconsax.bank,
-                    title: 'Bank Account',
-                    subTitle: 'Withdraw balance to registered bank account',
-                  ),
-                  TSettingsMenuTile(
                     icon: Iconsax.discount_shape,
                     title: 'My Coupons',
                     subTitle: 'List of all the discounted coupons',
@@ -131,7 +128,38 @@ class SettingsScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final confirm = await Get.dialog<bool>(
+                          AlertDialog(
+                            title: const Text('Logout'),
+                            content: const Text('Are you sure you want to log out?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Get.back(result: false),
+                                child: const Text('Cancel'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () => Get.back(result: true),
+                                child: const Text('Logout'),
+                              ),
+                            ],
+                          ),
+                        );
+
+                        if (confirm == true) {
+                          try {
+                            await FirebaseAuth.instance.signOut();
+
+                            // ✅ Navigate to LoginScreen widget directly
+                            Get.offAll(() => const LoginScreen());
+
+                            Get.snackbar('Logged Out', 'You have been signed out successfully');
+                          } catch (e) {
+                            Get.snackbar('Error', 'Logout failed: ${e.toString()}');
+                          }
+                        }
+                      },
+
                       child: const Text('Logout'),
                     ),
                   ),

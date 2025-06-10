@@ -72,7 +72,6 @@ class TProductImageSlider extends StatelessWidget {
                             images[index];
                         return TRoundedImage(
                           width: 80,
-                          isNetworkImage: true,
                           imageUrl: images[index],
                           padding: const EdgeInsets.all(TSizes.sm),
                           backgroundColor: dark ? TColors.dark : TColors.white,

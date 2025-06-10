@@ -21,7 +21,6 @@ class TCartItem extends StatelessWidget {
           imageUrl: cartItem.image ?? '',
           width: 60,
           height: 60,
-          isNetworkImage: true,
           padding: const EdgeInsets.all(TSizes.sm),
           backgroundColor:
               THelperFunctions.isDarkMode(context)

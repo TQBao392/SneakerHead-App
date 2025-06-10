@@ -7,61 +7,63 @@ import 'package:sneakerhead/utils/constants/sizes.dart';
 class ImagesController extends GetxController {
   static ImagesController get instance => Get.find();
 
-  /// Variables
+  /// Observable selected image
   RxString selectedProductImage = ''.obs;
 
-  /// -- Get All Images from product and Variations
+  /// Get all product image URLs (thumbnail, gallery, variations)
   List<String> getAllProductImages(ProductModel product) {
-    // Use Set to add unique images only
     Set<String> images = {};
 
-    // Load thumbnail image
-    images.add(product.thumbnail);
+    // Add main thumbnail
+    if (product.thumbnail.isNotEmpty) {
+      images.add(product.thumbnail);
+      selectedProductImage.value = product.thumbnail;
+    }
 
-    // Assign Thumbnail as Selected Image
-    selectedProductImage.value = product.thumbnail;
-
-    // Get all images from the Product Model if not null
-    if (product.images != null) {
+    // Add product gallery images
+    if (product.images != null && product.images!.isNotEmpty) {
       images.addAll(product.images!);
     }
 
-    // Get all images from the Product Variation if not null
-    if (product.productVaritations != null ||
-        product.productVaritations!.isNotEmpty) {
+    // Add variation images
+    if (product.productVariations != null && product.productVariations!.isNotEmpty) {
       images.addAll(
-        product.productVaritations!.map((variation) => variation.image),
+        product.productVariations!
+            .map((variation) => variation.image)
+            .where((image) => image.isNotEmpty),
       );
     }
+
     return images.toList();
   }
 
-  /// -- Show Image Popup
-  void showEnlargedImage(String image) {
+  /// Show fullscreen image popup
+  void showEnlargedImage(String imageUrl) {
     Get.to(
       fullscreenDialog: true,
-      () => Dialog.fullscreen(
+          () => Dialog.fullscreen(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: TSizes.defaultSpace * 2,
                 horizontal: TSizes.defaultSpace,
               ),
-              child: CachedNetworkImage(imageUrl: image),
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                placeholder: (context, url) =>
+                const CircularProgressIndicator(),
+                errorWidget: (context, url, error) =>
+                const Icon(Icons.error_outline),
+              ),
             ),
             const SizedBox(height: TSizes.spaceBtwSections),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: SizedBox(
-                width: 150,
-                child: OutlinedButton(
-                  onPressed: () => Get.back(),
-                  child: const Text('Close'),
-                ),
+            SizedBox(
+              width: 150,
+              child: OutlinedButton(
+                onPressed: () => Get.back(),
+                child: const Text('Close'),
               ),
             ),
           ],

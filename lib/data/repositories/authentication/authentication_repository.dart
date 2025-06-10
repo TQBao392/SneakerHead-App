@@ -88,26 +88,38 @@ class AuthenticationRepository extends GetxController {
 
   /// [EmailAuthentication] - REGISTER
   Future<UserCredential> registerWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+      String email,
+      String password,
+      ) async {
     try {
       return await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
+      switch (e.code) {
+        case 'email-already-in-use':
+          throw 'The email address is already registered. Try logging in instead.';
+        case 'invalid-email':
+          throw 'The email address is not valid. Please enter a correct email.';
+        case 'weak-password':
+          throw 'Your password is too weak. Use at least 6 characters.';
+        case 'operation-not-allowed':
+          throw 'Email/password accounts are not enabled. Please contact support.';
+        default:
+          throw 'Registration failed: ${e.message ?? 'Unknown FirebaseAuth error.'}';
+      }
     } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw const TFormatException();
+      throw 'A Firebase error occurred: ${e.message ?? 'Unknown Firebase error.'}';
+    } on FormatException {
+      throw 'Invalid input format. Please check your email and password.';
     } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      throw 'A platform error occurred: ${e.message ?? 'Unknown platform error.'}';
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Something went wrong. Please try again later.';
     }
   }
+
 
   /// Mail Verification
   Future<void> sendEmailVerification() async {
@@ -238,4 +250,5 @@ class AuthenticationRepository extends GetxController {
       throw 'Something went wrong. Please try again';
     }
   }
+
 }

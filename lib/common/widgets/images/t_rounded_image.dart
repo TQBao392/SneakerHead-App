@@ -1,5 +1,7 @@
 // ignore_for_file: unused_import
 
+import 'dart:developer'; // For Logcat logging
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sneakerhead/common/widgets/shimmers/shimmer.dart';
@@ -9,16 +11,15 @@ import 'package:sneakerhead/utils/constants/sizes.dart';
 class TRoundedImage extends StatelessWidget {
   const TRoundedImage({
     super.key,
-    this.border,
-    this.padding,
-    this.onPressed,
+    required this.imageUrl,
     this.width,
     this.height,
-    this.applyImageRadius = true,
-    required this.imageUrl,
-    this.fit = BoxFit.contain,
+    this.fit = BoxFit.cover,
     this.backgroundColor,
-    this.isNetworkImage = false,
+    this.border,
+    this.padding,
+    this.applyImageRadius = true,
+    this.onPressed,
     this.borderRadius = TSizes.md,
   });
 
@@ -29,12 +30,15 @@ class TRoundedImage extends StatelessWidget {
   final Color? backgroundColor;
   final BoxFit? fit;
   final EdgeInsetsGeometry? padding;
-  final bool isNetworkImage;
   final VoidCallback? onPressed;
   final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
+    final borderRad = applyImageRadius
+        ? BorderRadius.circular(borderRadius)
+        : BorderRadius.zero;
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -42,29 +46,25 @@ class TRoundedImage extends StatelessWidget {
         height: height,
         padding: padding,
         decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(TSizes.md),
+          color: backgroundColor ?? Colors.transparent,
+          border: border ?? Border.all(color: Colors.blueAccent), // Debug border
+          borderRadius: borderRad,
         ),
         child: ClipRRect(
-          borderRadius:
-              applyImageRadius
-                  ? BorderRadius.circular(TSizes.md)
-                  : BorderRadius.zero,
-          child:
-              isNetworkImage
-                  ? CachedNetworkImage(
-                    fit: fit,
-                    imageUrl: imageUrl,
-                    progressIndicatorBuilder:
-                        (context, url, downloadprogress) => TShimmerEffect(
-                          width: width ?? double.infinity,
-                          height: height ?? 158,
-                        ),
-                    errorWidget:
-                        (context, url, error) => const Icon(Icons.error),
-                  )
-                  : Image(fit: fit, image: AssetImage(imageUrl)),
+          borderRadius: borderRad,
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            fit: fit,
+            placeholder: (context, url) {
+              return TShimmerEffect(
+                width: width ?? double.infinity,
+                height: height ?? 158,
+              );
+            },
+            errorWidget: (context, url, error) {
+              return const Icon(Icons.error, color: Colors.red);
+            },
+          ),
         ),
       ),
     );
